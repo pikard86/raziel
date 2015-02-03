@@ -1,48 +1,61 @@
 package com.softm.secret.test;
 
-import java.util.HashMap;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.softm.AuthenticationChannel;
 import com.softm.AuthenticationProvider;
 import com.softm.secret.Owner;
-import com.softm.secret.OwnerFacrory;
+import com.softm.secret.OwnerFactory;
 import com.softm.secret.crypt.AESCofferKey;
 import com.softm.secret.crypt.CofferKey;
-import com.softm.secret.payload.AuthenticationTreasure;
-import com.softm.secret.payload.Coffer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthenticationProviderTest.
+ */
 public class AuthenticationProviderTest {
 
-
+	/** The Constant OWNER_ID. */
 	private static final String OWNER_ID = "ownerId";
+
+	/** The Constant PASSWORD. */
 	private static final String PASSWORD = "password";
+
+	/** The auth provider. */
 	private AuthenticationProvider authProvider;
 
+	/**
+	 * Setup test.
+	 */
 	@Before
-	public void setupTest(){
-		AuthCannelMock channelMock=new AuthCannelMock();
+	public void setupTest() {
+		final AuthCannelMock channelMock = new AuthCannelMock();
 
-		CofferKey ownerKey = new AESCofferKey(PASSWORD.getBytes());
-		Owner owner = OwnerFacrory.createOwner(OWNER_ID,ownerKey);
+		final CofferKey ownerKey = new AESCofferKey(PASSWORD.getBytes());
+		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);
 		channelMock.owners.put(owner.getId(), owner);
-		
+
 		authProvider = new AuthenticationProvider(channelMock);
 	}
-	@Test
-	public void signOnTest() {
-		CofferKey ownerKey = new AESCofferKey(PASSWORD.getBytes());
-		Owner owner = OwnerFacrory.createOwner(OWNER_ID,ownerKey);
-		boolean signOn = authProvider.signOn(owner);
-		Assert.assertTrue(signOn);
-	}
 
+	/**
+	 * Sign in test.
+	 */
 	@Test
 	public void signInTest() {
-	 	boolean result = authProvider.signIn(OWNER_ID,PASSWORD);
-		Assert.assertTrue(result);		
+		final boolean result = authProvider.signIn(OWNER_ID, PASSWORD);
+		Assert.assertTrue(result);
+	}
+
+	/**
+	 * Sign on test.
+	 */
+	@Test
+	public void signOnTest() {
+		final CofferKey ownerKey = new AESCofferKey(PASSWORD.getBytes());
+		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);
+		final boolean signOn = authProvider.signOn(owner);
+		Assert.assertTrue(signOn);
 	}
 }

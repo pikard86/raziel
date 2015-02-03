@@ -2,33 +2,72 @@ package com.softm.secret.payload;
 
 import com.softm.secret.crypt.CofferKey;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Coffer.
+ *
+ * @param <T> the generic type
+ */
 public class Coffer<T extends Treasure> {
 
-	private T treasure;
+	/** The encrypted bytes. */
 	private byte[] encryptedBytes;
+	
+	/** The treasure. */
+	private T treasure;
 
+	/**
+	 * Gets the encrypted bytes.
+	 *
+	 * @return the encrypted bytes
+	 */
 	public byte[] getEncryptedBytes() {
 		return encryptedBytes;
 	}
 
-	public void setEncryptedBytes(byte[] encryptedBytes) {
-		this.encryptedBytes = encryptedBytes;
-	}
-
+	/**
+	 * Gets the treasure.
+	 *
+	 * @return the treasure
+	 */
 	public T getTreasure() {
 		return treasure;
 	}
 
-	public void setTreasure(T treasure) {
-		this.treasure = treasure;
-	}
-
-	public void open(CofferKey key) {
-		key.openCoffer(this);
-	};
-
+	/**
+	 * Lock.
+	 *
+	 * @param key the key
+	 */
 	public void lock(CofferKey key) {
 		key.lockCoffer(this);
+	}
+
+	/**
+	 * Open.
+	 *
+	 * @param key the key
+	 */
+	public void open(CofferKey key) {
+		key.openCoffer(this);
+	}
+
+	/**
+	 * Sets the encrypted bytes.
+	 *
+	 * @param encryptedBytes the new encrypted bytes
+	 */
+	public void setEncryptedBytes(byte[] encryptedBytes) {
+		this.encryptedBytes = encryptedBytes;
+	};
+
+	/**
+	 * Sets the treasure.
+	 *
+	 * @param treasure the new treasure
+	 */
+	public void setTreasure(T treasure) {
+		this.treasure = treasure;
 	}
 
 }

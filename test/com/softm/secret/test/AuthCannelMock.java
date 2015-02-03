@@ -7,26 +7,51 @@ import com.softm.secret.Owner;
 import com.softm.secret.payload.AuthenticationTreasure;
 import com.softm.secret.payload.Coffer;
 
-public class AuthCannelMock implements AuthenticationChannel{
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthCannelMock.
+ */
+public class AuthCannelMock implements AuthenticationChannel {
 
-	public HashMap<String, Owner> owners=new HashMap<String, Owner>();
-	
+	/** The owners. */
+	public HashMap<String, Owner> owners = new HashMap<String, Owner>();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.softm.AuthenticationChannel#doSignIn(java.lang.String,
+	 * java.lang.String)
+	 */
 	@Override
-	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(String ownerId) {
-		Owner owner = owners.get(ownerId);
-		return owner.getAuthenticationCoffer();
+	public boolean doSignIn(final String ownerId,
+			final String authenticationToken) {
+		final Owner owner = owners.get(ownerId);
+		return owner != null
+				&& owner.getAuthenticationToken().equals(authenticationToken);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.softm.AuthenticationChannel#doSignOn(com.softm.secret.Owner)
+	 */
 	@Override
-	public boolean doSignIn(String ownerId, String authenticationToken) {
-		Owner owner = owners.get(ownerId);		
-		return owner!=null && owner.getAuthenticationToken().equals(authenticationToken);
-	}
-
-	@Override
-	public boolean doSignOn(Owner owner) {
+	public boolean doSignOn(final Owner owner) {
 		owners.put(owner.getId(), owner);
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.softm.AuthenticationChannel#getAuthenticationCoffer(java.lang.String)
+	 */
+	@Override
+	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(
+			final String ownerId) {
+		final Owner owner = owners.get(ownerId);
+		return owner.getAuthenticationCoffer();
 	}
 
 }
