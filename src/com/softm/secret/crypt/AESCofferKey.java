@@ -1,3 +1,7 @@
+/*
+ * Raziel
+ * SofthMelody a Fishella Corporation Company
+ */
 package com.softm.secret.crypt;
 
 import java.security.InvalidKeyException;
@@ -70,7 +74,7 @@ public class AESCofferKey extends CofferKey {
 	}
 
 	/**
-	 * Inits the cipher.
+	 * Initializes cipher.
 	 *
 	 * @param encryptMode
 	 *            the encrypt mode
@@ -107,7 +111,7 @@ public class AESCofferKey extends CofferKey {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.softm.secret.crypt.CofferKey#lockCoffer(com.softm.secret.payload.
 	 * Coffer)
@@ -129,7 +133,7 @@ public class AESCofferKey extends CofferKey {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.softm.secret.crypt.CofferKey#openCoffer(com.softm.secret.payload.
 	 * Coffer)

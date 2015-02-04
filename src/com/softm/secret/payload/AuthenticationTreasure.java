@@ -1,3 +1,7 @@
+/*
+ * Raziel
+ * SofthMelody a Fishella Corporation Company
+ */
 package com.softm.secret.payload;
 
 import com.softm.secret.crypt.CofferKey;
