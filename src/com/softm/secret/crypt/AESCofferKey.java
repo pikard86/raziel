@@ -1,6 +1,6 @@
 /*
  * Raziel
- * SofthMelody a Fishella Corporation Company
+ * SofthMelody a Fiscella Corporation Company
  */
 package com.softm.secret.crypt;
 
@@ -111,7 +111,7 @@ public class AESCofferKey extends CofferKey {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.softm.secret.crypt.CofferKey#lockCoffer(com.softm.secret.payload.
 	 * Coffer)
@@ -133,7 +133,7 @@ public class AESCofferKey extends CofferKey {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.softm.secret.crypt.CofferKey#openCoffer(com.softm.secret.payload.
 	 * Coffer)

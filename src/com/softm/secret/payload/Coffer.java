@@ -1,6 +1,6 @@
 /*
- * Raziel 
- * SofthMelody a Fishella Corporation Company 
+ * Raziel
+ * SofthMelody a Fiscella Corporation Company
  */
 package com.softm.secret.payload;
 
@@ -10,13 +10,14 @@ import com.softm.secret.crypt.CofferKey;
 /**
  * The Class Coffer.
  *
- * @param <T> the generic type
+ * @param <T>
+ *            the generic type
  */
 public class Coffer<T extends Treasure> {
 
 	/** The encrypted bytes. */
 	private byte[] encryptedBytes;
-	
+
 	/** The treasure. */
 	private T treasure;
 
@@ -41,36 +42,40 @@ public class Coffer<T extends Treasure> {
 	/**
 	 * Lock.
 	 *
-	 * @param key the key
+	 * @param key
+	 *            the key
 	 */
-	public void lock(CofferKey key) {
+	public void lock(final CofferKey key) {
 		key.lockCoffer(this);
 	}
 
 	/**
 	 * Open.
 	 *
-	 * @param key the key
+	 * @param key
+	 *            the key
 	 */
-	public void open(CofferKey key) {
+	public void open(final CofferKey key) {
 		key.openCoffer(this);
 	}
 
 	/**
 	 * Sets the encrypted bytes.
 	 *
-	 * @param encryptedBytes the new encrypted bytes
+	 * @param encryptedBytes
+	 *            the new encrypted bytes
 	 */
-	public void setEncryptedBytes(byte[] encryptedBytes) {
+	public void setEncryptedBytes(final byte[] encryptedBytes) {
 		this.encryptedBytes = encryptedBytes;
 	};
 
 	/**
 	 * Sets the treasure.
 	 *
-	 * @param treasure the new treasure
+	 * @param treasure
+	 *            the new treasure
 	 */
-	public void setTreasure(T treasure) {
+	public void setTreasure(final T treasure) {
 		this.treasure = treasure;
 	}
 

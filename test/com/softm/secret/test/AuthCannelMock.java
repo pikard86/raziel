@@ -1,6 +1,6 @@
 /*
  * Raziel
- * SofthMelody a Fishella Corporation Company
+ * SofthMelody a Fiscella Corporation Company
  */
 package com.softm.secret.test;
 
@@ -22,7 +22,7 @@ public class AuthCannelMock implements AuthenticationChannel {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.softm.AuthenticationChannel#doSignIn(java.lang.String,
 	 * java.lang.String)
 	 */
@@ -36,7 +36,7 @@ public class AuthCannelMock implements AuthenticationChannel {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.softm.AuthenticationChannel#doSignOn(com.softm.secret.Owner)
 	 */
 	@Override
@@ -47,7 +47,7 @@ public class AuthCannelMock implements AuthenticationChannel {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.softm.AuthenticationChannel#getAuthenticationCoffer(java.lang.String)
 	 */
