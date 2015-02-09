@@ -2,7 +2,7 @@
  * Raziel 
  * SofthMelody a Fiscella Corporation Company 
  */
-package com.softm.secret.crypt;
+package com.softm.raziel.crypt;
 
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -12,8 +12,8 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
-import com.softm.secret.payload.Coffer;
-import com.softm.secret.payload.Treasure;
+import com.softm.raziel.payload.Coffer;
+import com.softm.raziel.payload.Treasure;
 
 // TODO: Auto-generated Javadoc
 /**

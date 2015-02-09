@@ -2,14 +2,14 @@
  * Raziel
  * SofthMelody a Fiscella Corporation Company
  */
-package com.softm.secret.test;
+package com.softm.raziel.test;
 
 import java.util.HashMap;
 
-import com.softm.AuthenticationChannel;
-import com.softm.secret.Owner;
-import com.softm.secret.payload.AuthenticationTreasure;
-import com.softm.secret.payload.Coffer;
+import com.softm.raziel.Owner;
+import com.softm.raziel.auth.AuthenticationChannel;
+import com.softm.raziel.payload.AuthenticationTreasure;
+import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
 /**

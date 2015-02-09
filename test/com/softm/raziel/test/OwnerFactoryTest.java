@@ -2,17 +2,17 @@
  * Raziel
  * SofthMelody a Fiscella Corporation Company
  */
-package com.softm.secret.test;
+package com.softm.raziel.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import com.softm.secret.Owner;
-import com.softm.secret.OwnerFactory;
-import com.softm.secret.crypt.AESCofferKey;
-import com.softm.secret.crypt.CofferKey;
+import com.softm.raziel.Owner;
+import com.softm.raziel.OwnerFactory;
+import com.softm.raziel.crypt.AESCofferKey;
+import com.softm.raziel.crypt.CofferKey;
 
 // TODO: Auto-generated Javadoc
 /**

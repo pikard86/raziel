@@ -2,7 +2,7 @@
  * Raziel 
  * SofthMelody a Fiscella Corporation Company 
  */
-package com.softm.secret.payload;
+package com.softm.raziel.payload;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

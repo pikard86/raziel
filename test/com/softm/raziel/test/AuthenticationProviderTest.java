@@ -2,17 +2,17 @@
  * Raziel
  * SofthMelody a Fiscella Corporation Company
  */
-package com.softm.secret.test;
+package com.softm.raziel.test;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.softm.AuthenticationProvider;
-import com.softm.secret.Owner;
-import com.softm.secret.OwnerFactory;
-import com.softm.secret.crypt.AESCofferKey;
-import com.softm.secret.crypt.CofferKey;
+import com.softm.raziel.Owner;
+import com.softm.raziel.OwnerFactory;
+import com.softm.raziel.auth.AuthenticationClient;
+import com.softm.raziel.crypt.AESCofferKey;
+import com.softm.raziel.crypt.CofferKey;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,7 +27,7 @@ public class AuthenticationProviderTest {
 	private static final String PASSWORD = "password";
 
 	/** The auth provider. */
-	private AuthenticationProvider authProvider;
+	private AuthenticationClient authProvider;
 
 	/**
 	 * Setup test.
@@ -40,7 +40,7 @@ public class AuthenticationProviderTest {
 		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);
 		channelMock.owners.put(owner.getId(), owner);
 
-		authProvider = new AuthenticationProvider(channelMock);
+		authProvider = new AuthenticationClient(channelMock);
 	}
 
 	/**

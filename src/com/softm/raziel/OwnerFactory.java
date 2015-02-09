@@ -2,17 +2,17 @@
  * Raziel
  * SofthMelody a Fiscella Corporation Company
  */
-package com.softm.secret;
+package com.softm.raziel;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
-import com.softm.secret.crypt.CofferKey;
-import com.softm.secret.crypt.RSACofferKey;
-import com.softm.secret.payload.AuthenticationTreasure;
-import com.softm.secret.payload.Coffer;
+import com.softm.raziel.crypt.CofferKey;
+import com.softm.raziel.crypt.RSACofferKey;
+import com.softm.raziel.payload.AuthenticationTreasure;
+import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
 
@@ -22,7 +22,7 @@ import com.softm.secret.payload.Coffer;
 public class OwnerFactory {
 
 	/**
-	 * Creates the owner.
+	 * Creates the owner. with encripted authentication treasures
 	 *
 	 * @param ownerId
 	 *            the owner id

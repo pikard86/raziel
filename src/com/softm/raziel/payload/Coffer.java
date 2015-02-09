@@ -2,9 +2,9 @@
  * Raziel
  * SofthMelody a Fiscella Corporation Company
  */
-package com.softm.secret.payload;
+package com.softm.raziel.payload;
 
-import com.softm.secret.crypt.CofferKey;
+import com.softm.raziel.crypt.CofferKey;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -14,6 +14,9 @@ import com.softm.secret.crypt.CofferKey;
  *            the generic type
  */
 public class Coffer<T extends Treasure> {
+
+	/** The id. */
+	private long id;
 
 	/** The encrypted bytes. */
 	private byte[] encryptedBytes;
@@ -28,6 +31,15 @@ public class Coffer<T extends Treasure> {
 	 */
 	public byte[] getEncryptedBytes() {
 		return encryptedBytes;
+	}
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
 	}
 
 	/**
@@ -67,6 +79,16 @@ public class Coffer<T extends Treasure> {
 	 */
 	public void setEncryptedBytes(final byte[] encryptedBytes) {
 		this.encryptedBytes = encryptedBytes;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(final long id) {
+		this.id = id;
 	};
 
 	/**

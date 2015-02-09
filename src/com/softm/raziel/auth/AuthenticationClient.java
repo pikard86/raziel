@@ -2,18 +2,18 @@
  * Raziel 
  * SofthMelody a Fiscella Corporation Company 
  */
-package com.softm;
+package com.softm.raziel.auth;
 
-import com.softm.secret.Owner;
-import com.softm.secret.crypt.AESCofferKey;
-import com.softm.secret.payload.AuthenticationTreasure;
-import com.softm.secret.payload.Coffer;
+import com.softm.raziel.Owner;
+import com.softm.raziel.crypt.AESCofferKey;
+import com.softm.raziel.payload.AuthenticationTreasure;
+import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AuthenticationProvider.
  */
-public class AuthenticationProvider {
+public class AuthenticationClient {
 	
 	/**
 	 * The Interface SignOnCallback.
@@ -39,7 +39,7 @@ public class AuthenticationProvider {
 	 *
 	 * @param channel the channel
 	 */
-	public AuthenticationProvider(AuthenticationChannel channel) {
+	public AuthenticationClient(AuthenticationChannel channel) {
 		super();
 		this.channel = channel;
 	}

@@ -2,10 +2,12 @@
  * Raziel
  * SofthMelody a Fiscella Corporation Company
  */
-package com.softm.secret;
+package com.softm.raziel;
 
-import com.softm.secret.payload.AuthenticationTreasure;
-import com.softm.secret.payload.Coffer;
+import java.util.List;
+
+import com.softm.raziel.payload.AuthenticationTreasure;
+import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -24,6 +26,9 @@ public class Owner {
 
 	/** The public key. */
 	private byte[] publicKey;
+
+	/** The owned coffers. */
+	private List<Long> ownedCoffers;
 
 	/**
 	 * Gets the authentication coffer.
@@ -50,6 +55,15 @@ public class Owner {
 	 */
 	public String getId() {
 		return id;
+	}
+
+	/**
+	 * Gets the owned coffers.
+	 *
+	 * @return the owned coffers
+	 */
+	public List<Long> getOwnedCoffers() {
+		return ownedCoffers;
 	}
 
 	/**
@@ -90,6 +104,16 @@ public class Owner {
 	 */
 	public void setId(final String id) {
 		this.id = id;
+	}
+
+	/**
+	 * Sets the owned coffers.
+	 *
+	 * @param ownedCoffers
+	 *            the new owned coffers
+	 */
+	public void setOwnedCoffers(final List<Long> ownedCoffers) {
+		this.ownedCoffers = ownedCoffers;
 	}
 
 	/**
