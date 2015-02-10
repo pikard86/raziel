@@ -1,6 +1,18 @@
 /*
- * Raziel
- * SofthMelody a Fiscella Corporation Company
+ *   Raziel - The Agnostic Library for authentication and private content sharing
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the General Pizzurro License as published by
+ *   the Pizzurro Free Software Foundation, either version 1 of the License
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Pizzurro License for more details.
+ *
+ *   You should have received a copy of the General Pizzurro License
+ *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
 package com.softm.raziel.test;
 
@@ -18,11 +30,15 @@ import com.softm.raziel.repo.CofferRepository;
  */
 public class CofferRepositoryTest {
 
+	/**
+	 * The Class TestTreasure.
+	 */
 	private class TestTreasure extends Treasure {
-		/**
-		 *
-		 */
+
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1681023468744262900L;
+
+		/** The message. */
 		private String message;
 
 		/**
@@ -34,6 +50,12 @@ public class CofferRepositoryTest {
 			return message;
 		}
 
+		/**
+		 * Sets the message.
+		 *
+		 * @param message
+		 *            the new message
+		 */
 		public void setMessage(final String message) {
 			this.message = message;
 		}

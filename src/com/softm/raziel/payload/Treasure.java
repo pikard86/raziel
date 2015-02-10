@@ -1,6 +1,18 @@
 /*
- * Raziel 
- * SofthMelody a Fiscella Corporation Company 
+ *   Raziel - The Agnostic Library for authentication and private content sharing
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the General Pizzurro License as published by
+ *   the Pizzurro Free Software Foundation, either version 1 of the License
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Pizzurro License for more details.
+ *
+ *   You should have received a copy of the General Pizzurro License
+ *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
 package com.softm.raziel.payload;
 
@@ -17,32 +29,30 @@ import java.io.Serializable;
  * The Class Treasure.
  */
 public abstract class Treasure implements Serializable {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -7396530147151236165L;
 
 	/**
 	 * Inflate.
 	 *
-	 * @param treasureBytes the treasure bytes
+	 * @param treasureBytes
+	 *            the treasure bytes
 	 * @return the treasure
 	 */
-	public static Treasure inflate(byte[] treasureBytes) {
-		InputStream inputStream = new ByteArrayInputStream(treasureBytes);
+	public static Treasure inflate(final byte[] treasureBytes) {
+		final InputStream inputStream = new ByteArrayInputStream(treasureBytes);
 		try {
-			ObjectInputStream objectInputStream = new ObjectInputStream(
+			final ObjectInputStream objectInputStream = new ObjectInputStream(
 					inputStream);
 			try {
-				Object obj = objectInputStream.readObject();
+				final Object obj = objectInputStream.readObject();
 				if (obj instanceof Treasure) {
-					Treasure treasure = (Treasure) obj;
+					final Treasure treasure = (Treasure) obj;
 					return treasure;
 				}
-			} catch (ClassNotFoundException e) {
+			} catch (final ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -50,13 +60,16 @@ public abstract class Treasure implements Serializable {
 		return null;
 	}
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -7396530147151236165L;
+
 	/**
 	 * Gets the bytes.
 	 *
 	 * @return the bytes
 	 */
 	public byte[] getBytes() {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectOutputStream objectStream = null;
 		byte[] treasureBytes = null;
 		try {
@@ -64,7 +77,7 @@ public abstract class Treasure implements Serializable {
 			objectStream.writeObject(this);
 			treasureBytes = out.toByteArray();
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 			// TODO bubble the exception
 		} finally {
@@ -73,7 +86,7 @@ public abstract class Treasure implements Serializable {
 					objectStream.close();
 				}
 				out.close();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 		}
