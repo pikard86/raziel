@@ -21,18 +21,18 @@ import org.mockito.Mockito;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
-import com.softm.raziel.auth.AutenticationServer;
-import com.softm.raziel.auth.UndefinedOwnerException;
-import com.softm.raziel.auth.WrongOwnerCredentialException;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
+import com.softm.raziel.exceptions.UndefinedOwnerException;
+import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.repo.OwnerRepository;
+import com.softm.raziel.server.AutenticationService;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AuthenticationServerTest.
  */
-public class AuthenticationServerTest {
+public class AuthenticationServiceTest {
 
 	/** The Constant OWNER_PASSWORD. */
 	private static final String OWNER_PASSWORD = "owner:password";
@@ -63,7 +63,7 @@ public class AuthenticationServerTest {
 				.thenReturn(owner);
 
 		final String authenticationToken = owner.getAuthenticationToken();
-		final AutenticationServer authServer = new AutenticationServer(
+		final AutenticationService authServer = new AutenticationService(
 				ownerRepository);
 
 		authServer.onSignInRequest(ownerId, authenticationToken);
@@ -88,7 +88,7 @@ public class AuthenticationServerTest {
 		final CofferKey ownerKey = new AESCofferKey(OWNER_PASSWORD.getBytes());
 		final Owner owner = OwnerFactory.createOwner(ownerId, ownerKey);
 
-		final AutenticationServer authServer = new AutenticationServer(
+		final AutenticationService authServer = new AutenticationService(
 				ownerRepository);
 
 		authServer.onSignOnRequest(owner);

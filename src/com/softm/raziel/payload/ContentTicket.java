@@ -22,7 +22,7 @@ import com.softm.raziel.crypt.CofferKey;
 /**
  * The Class SharedContent.
  */
-public class SharedContent extends Treasure {
+public class ContentTicket extends Treasure {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7497300550265891449L;

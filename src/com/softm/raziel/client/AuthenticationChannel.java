@@ -14,7 +14,7 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.auth;
+package com.softm.raziel.client;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.payload.AuthenticationTreasure;

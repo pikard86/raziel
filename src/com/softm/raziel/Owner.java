@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -16,6 +16,7 @@
  */
 package com.softm.raziel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.softm.raziel.payload.AuthenticationTreasure;
@@ -40,7 +41,11 @@ public class Owner {
 	private byte[] publicKey;
 
 	/** The owned coffers. */
-	private List<Long> ownedCoffers;
+	private List<Long> ownedTikets = new ArrayList<Long>();
+
+	public void addTiket(final long tiketId) {
+		ownedTikets.add(tiketId);
+	}
 
 	/**
 	 * Gets the authentication coffer.
@@ -70,12 +75,12 @@ public class Owner {
 	}
 
 	/**
-	 * Gets the owned coffers.
+	 * Gets the owned tikets.
 	 *
-	 * @return the owned coffers
+	 * @return the owned tikets
 	 */
-	public List<Long> getOwnedCoffers() {
-		return ownedCoffers;
+	public List<Long> getOwnedTikets() {
+		return ownedTikets;
 	}
 
 	/**
@@ -119,13 +124,13 @@ public class Owner {
 	}
 
 	/**
-	 * Sets the owned coffers.
+	 * Sets the owned tikets.
 	 *
-	 * @param ownedCoffers
-	 *            the new owned coffers
+	 * @param ownedTikets
+	 *            the new owned tikets
 	 */
-	public void setOwnedCoffers(final List<Long> ownedCoffers) {
-		this.ownedCoffers = ownedCoffers;
+	public void setOwnedTikets(final List<Long> ownedTikets) {
+		this.ownedTikets = ownedTikets;
 	}
 
 	/**

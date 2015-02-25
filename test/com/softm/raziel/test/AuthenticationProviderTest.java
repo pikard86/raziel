@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
-import com.softm.raziel.auth.AuthenticationClient;
+import com.softm.raziel.client.AuthenticationClient;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
 

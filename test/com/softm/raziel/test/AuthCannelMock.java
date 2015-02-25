@@ -19,7 +19,7 @@ package com.softm.raziel.test;
 import java.util.HashMap;
 
 import com.softm.raziel.Owner;
-import com.softm.raziel.auth.AuthenticationChannel;
+import com.softm.raziel.client.AuthenticationChannel;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 

@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -61,7 +61,7 @@ public class OwnerFactory {
 		/*
 		 * Obtains the CofferKey
 		 */
-		final CofferKey key = getCofferKey();
+		final RSACofferKey key = getCofferKey();
 		/*
 		 * Put the key into the treasure
 		 */
@@ -75,6 +75,7 @@ public class OwnerFactory {
 		 */
 		authCoffer.lock(ownerKey);
 		owner.setId(ownerId);
+		owner.setPublicKey(key.getPublicKey());
 		owner.setAuthenticationCoffer(authCoffer);
 		owner.setAuthenticationToken(authenticationToken);
 		return owner;
@@ -94,7 +95,7 @@ public class OwnerFactory {
 	 *
 	 * @return the coffer key
 	 */
-	protected static CofferKey getCofferKey() {
+	protected static RSACofferKey getCofferKey() {
 		try {
 
 			final KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
@@ -115,50 +116,6 @@ public class OwnerFactory {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	/** The private key. */
-	private Byte[] privateKey;
-
-	/** The public key. */
-	private Byte[] publicKey;
-
-	/**
-	 * Gets the private key.
-	 *
-	 * @return the private key
-	 */
-	public Byte[] getPrivateKey() {
-		return privateKey;
-	}
-
-	/**
-	 * Gets the public key.
-	 *
-	 * @return the public key
-	 */
-	public Byte[] getPublicKey() {
-		return publicKey;
-	}
-
-	/**
-	 * Sets the private key.
-	 *
-	 * @param privateKey
-	 *            the new private key
-	 */
-	public void setPrivateKey(final Byte[] privateKey) {
-		this.privateKey = privateKey;
-	}
-
-	/**
-	 * Sets the public key.
-	 *
-	 * @param publicKey
-	 *            the new public key
-	 */
-	public void setPublicKey(final Byte[] publicKey) {
-		this.publicKey = publicKey;
 	}
 
 }

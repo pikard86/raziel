@@ -14,27 +14,27 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.auth;
+package com.softm.raziel.exceptions;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class WrongOwnerCredentialException.
+ * The Class UndefinedOwnerException.
  */
-public class WrongOwnerCredentialException extends Exception {
+public class UndefinedOwnerException extends Exception {
 
-	/** The Constant WRONG_AUTHENTICATION_TOKEN_FOR_OWNRE_ID. */
-	private static final String WRONG_AUTHENTICATION_TOKEN_FOR_OWNRE_ID = "Wrong authentication token for ownre id : ";
+	/** The Constant UNABLE_TO_RETREIVE_OWNER_ID. */
+	private static final String UNABLE_TO_RETREIVE_OWNER_ID = "Unable to retreive owner id : ";
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -8361751331403510256L;
+	private static final long serialVersionUID = -4113268056849915971L;
 
 	/**
-	 * Instantiates a new wrong owner credential exception.
+	 * Instantiates a new undefined owner exception.
 	 *
 	 * @param ownerId
 	 *            the owner id
 	 */
-	public WrongOwnerCredentialException(final String ownerId) {
-		super(WRONG_AUTHENTICATION_TOKEN_FOR_OWNRE_ID + ownerId);
+	public UndefinedOwnerException(final String ownerId) {
+		super(UNABLE_TO_RETREIVE_OWNER_ID + ownerId);
 	}
 
 }

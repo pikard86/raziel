@@ -14,16 +14,18 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.auth;
+package com.softm.raziel.server;
 
 import com.softm.raziel.Owner;
+import com.softm.raziel.exceptions.UndefinedOwnerException;
+import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.repo.OwnerRepository;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AutenticationServer.
+ * The Class .
  */
-public class AutenticationServer {
+public class AutenticationService {
 
 	/** The owner repository. */
 	private final OwnerRepository ownerRepository;
@@ -34,8 +36,17 @@ public class AutenticationServer {
 	 * @param ownerRepository
 	 *            the owner repository
 	 */
-	public AutenticationServer(final OwnerRepository ownerRepository) {
+	public AutenticationService(final OwnerRepository ownerRepository) {
 		this.ownerRepository = ownerRepository;
+	}
+
+	/**
+	 * Gets the owner repository.
+	 *
+	 * @return the owner repository
+	 */
+	public OwnerRepository getOwnerRepository() {
+		return ownerRepository;
 	}
 
 	/**
@@ -69,8 +80,6 @@ public class AutenticationServer {
 	 *            the owner
 	 */
 	public void onSignOnRequest(final Owner owner) {
-		// TODO: add checks on owner fields
-
 		ownerRepository.store(owner);
 	}
 
