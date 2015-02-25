@@ -36,7 +36,7 @@ public class ContentServiceClientTest {
 	private static final String OWNER_ID = "BOB";
 
 	@Test
-	public void test() {
+	public void storeContentTest() {
 		final ContentChannel contentChannel = Mockito
 				.mock(ContentChannel.class);
 		final byte[] key = PASSWORD.getBytes();
