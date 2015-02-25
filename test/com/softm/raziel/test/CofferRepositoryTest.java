@@ -16,12 +16,13 @@
  */
 package com.softm.raziel.test;
 
+import java.io.Serializable;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.softm.raziel.payload.Coffer;
-import com.softm.raziel.payload.Treasure;
 import com.softm.raziel.repo.CofferRepository;
 
 // TODO: Auto-generated Javadoc
@@ -33,7 +34,7 @@ public class CofferRepositoryTest {
 	/**
 	 * The Class TestTreasure.
 	 */
-	private class TestTreasure extends Treasure {
+	private class TestTreasure implements Serializable {
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1681023468744262900L;

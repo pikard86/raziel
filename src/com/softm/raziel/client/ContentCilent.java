@@ -16,6 +16,7 @@
  */
 package com.softm.raziel.client;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import com.softm.raziel.Owner;
@@ -24,7 +25,6 @@ import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.crypt.RSACyperUtil;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
-import com.softm.raziel.payload.Treasure;
 
 /**
  * The Class ContentCilent.
@@ -65,7 +65,7 @@ public class ContentCilent {
 		return ticket;
 	}
 
-	public void storeContent(final Treasure plainContent) {
+	public void storeContent(final Serializable plainContent) {
 
 		final Owner owner = session.getOwner();
 		final String ownerId = owner.getId();
@@ -74,7 +74,7 @@ public class ContentCilent {
 		final String randomPassword = UUID.randomUUID().toString();
 		final AESCofferKey contentKey = new AESCofferKey(randomPassword);
 
-		final Coffer<Treasure> contentCoffer = new Coffer<Treasure>();
+		final Coffer contentCoffer = new Coffer();
 		contentCoffer.setTreasure(plainContent);
 		contentCoffer.lock(contentKey);
 

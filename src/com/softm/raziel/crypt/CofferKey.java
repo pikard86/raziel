@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -18,8 +18,6 @@ package com.softm.raziel.crypt;
 
 import java.io.Serializable;
 
-import com.softm.raziel.payload.Coffer;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class CofferKey.
@@ -32,18 +30,21 @@ public abstract class CofferKey implements Serializable {
 	private static final long serialVersionUID = -4662067005874119024L;
 
 	/**
-	 * Encrypt the Coffer treasure.
+	 * Lock coffer.
 	 *
-	 * @param coffer
-	 *            the coffer
+	 * @param treasureBytes
+	 *            the treasure bytes
+	 * @return the byte[]
 	 */
-	public abstract void lockCoffer(Coffer coffer);
+	public abstract byte[] lockCoffer(byte[] treasureBytes);
 
 	/**
-	 * Decrypt coffer treasure.
+	 * Open coffer.
 	 *
-	 * @param closedCoffer
-	 *            the closed coffer
+	 * @param encryptedBytes
+	 *            the encrypted bytes
+	 * @return the byte[]
 	 */
-	public abstract void openCoffer(Coffer closedCoffer);
+	public abstract byte[] openCoffer(byte[] encryptedBytes);
+
 }

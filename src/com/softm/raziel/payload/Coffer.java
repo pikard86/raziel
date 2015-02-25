@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import com.softm.raziel.crypt.CofferKey;
 
@@ -32,7 +33,7 @@ import com.softm.raziel.crypt.CofferKey;
  * @param <T>
  *            the generic type
  */
-public class Coffer<T extends Treasure> {
+public class Coffer<T extends Serializable> {
 
 	/** The id. */
 	private long id;
@@ -78,7 +79,7 @@ public class Coffer<T extends Treasure> {
 	 *
 	 * @return the bytes
 	 */
-	public byte[] getTreasureBytes() {
+	private byte[] getTreasureBytes() {
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectOutputStream objectStream = null;
 		byte[] treasureBytes = null;
@@ -103,17 +104,15 @@ public class Coffer<T extends Treasure> {
 		return treasureBytes;
 	}
 
-	public T inflateTreasure(final byte[] treasureBytes) {
+	private T inflateTreasure(final byte[] treasureBytes) {
 		final InputStream inputStream = new ByteArrayInputStream(treasureBytes);
 		try {
 			final ObjectInputStream objectInputStream = new ObjectInputStream(
 					inputStream);
 			try {
 				final Object obj = objectInputStream.readObject();
-				if (obj instanceof Treasure) {
-					final T treasure = (T) obj;
-					return treasure;
-				}
+				final T treasure = (T) obj;
+				return treasure;
 			} catch (final ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -133,7 +132,8 @@ public class Coffer<T extends Treasure> {
 	 *            the key
 	 */
 	public void lock(final CofferKey key) {
-		key.lockCoffer(this);
+		setEncryptedBytes(key.lockCoffer(this.getTreasureBytes()));
+		setTreasure(null);
 	};
 
 	/**
@@ -143,7 +143,10 @@ public class Coffer<T extends Treasure> {
 	 *            the key
 	 */
 	public void open(final CofferKey key) {
-		key.openCoffer(this);
+		final byte[] decriptedBytes = key.openCoffer(this.getEncryptedBytes());
+		final T inflatedTreasure = inflateTreasure(decriptedBytes);
+		setTreasure(inflatedTreasure);
+		setEncryptedBytes(null);
 	}
 
 	/**

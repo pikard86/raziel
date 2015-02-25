@@ -18,7 +18,6 @@ package com.softm.raziel.client;
 
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
-import com.softm.raziel.payload.Treasure;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,5 +54,5 @@ public interface ContentChannel {
 	 *            the content coffer
 	 * @return the long
 	 */
-	long storeCoffer(Coffer<Treasure> contentCoffer);
+	long storeCoffer(Coffer<?> contentCoffer);
 }

@@ -16,13 +16,15 @@
  */
 package com.softm.raziel.payload;
 
+import java.io.Serializable;
+
 import com.softm.raziel.crypt.AsymmetricKey;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AuthenticationTreasure.
  */
-public class AuthenticationTreasure extends Treasure {
+public class AuthenticationTreasure implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7710566999094551344L;

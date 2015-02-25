@@ -28,9 +28,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.softm.raziel.payload.Coffer;
-import com.softm.raziel.payload.Treasure;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class AESCofferKey.
@@ -125,48 +122,30 @@ public class AESCofferKey extends CofferKey {
 		return cipher;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.softm.secret.crypt.CofferKey#lockCoffer(com.softm.secret.payload.
-	 * Coffer)
-	 */
 	@Override
-	public void lockCoffer(final Coffer coffer) {
-
+	public byte[] lockCoffer(final byte[] treasureBytes) {
 		try {
 			final Cipher cipher = initCipher(Cipher.ENCRYPT_MODE);
-			final byte[] encrypted = cipher.doFinal(coffer.getTreasure()
-					.getBytes());
-			coffer.setEncryptedBytes(encrypted);
-			coffer.setTreasure(null);
+			final byte[] encrypted = cipher.doFinal(treasureBytes);
+			return encrypted;
 		} catch (final Exception e) {
 			e.printStackTrace();
 			// TODO : handle exceptions
 		}
+		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.softm.secret.crypt.CofferKey#openCoffer(com.softm.secret.payload.
-	 * Coffer)
-	 */
 	@Override
-	public void openCoffer(final Coffer closedCoffer) {
+	public byte[] openCoffer(final byte[] encryptedBytes) {
 		try {
 			final Cipher cipher = initCipher(Cipher.DECRYPT_MODE);
-			final byte[] decrypted_bytes = cipher.doFinal(closedCoffer
-					.getEncryptedBytes());
-			closedCoffer.setTreasure(Treasure.inflate(decrypted_bytes));
-			closedCoffer.setEncryptedBytes(null);
+			final byte[] decrypted_bytes = cipher.doFinal(encryptedBytes);
+			return decrypted_bytes;
 		} catch (final Exception e) {
 			e.printStackTrace();
 			// TODO : handle exceptions
 		}
-
+		return null;
 	}
 
 	/**

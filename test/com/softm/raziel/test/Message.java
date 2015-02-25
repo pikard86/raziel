@@ -1,10 +1,9 @@
 package com.softm.raziel.test;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.softm.raziel.payload.Treasure;
-
-public class Message extends Treasure {
+public class Message implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1194816913795414569L;
