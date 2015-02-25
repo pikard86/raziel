@@ -14,7 +14,7 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.test;
+package com.softm.raziel.server;
 
 import org.junit.Test;
 import org.mockito.Mockito;

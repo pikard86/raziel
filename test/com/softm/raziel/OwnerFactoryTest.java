@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -14,7 +14,7 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.test;
+package com.softm.raziel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -57,7 +57,7 @@ public class OwnerFactoryTest {
 		 * The owner can be sent to the server to store encrypted coffer, public
 		 * key and shared auth token
 		 *
-		 * on login the server will sent the authentication coffer the client
+		 * on login the server will send the authentication coffer the client
 		 * extracts the token from the coffer and sent it back to the server
 		 * using ssl
 		 *

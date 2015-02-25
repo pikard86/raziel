@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -14,7 +14,7 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.test;
+package com.softm.raziel.server;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,9 +22,11 @@ import org.junit.Test;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
+import com.softm.raziel.client.AuthCannelMock;
 import com.softm.raziel.client.AuthenticationClient;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
+import com.softm.raziel.exceptions.UndefinedOwnerException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,11 +59,13 @@ public class AuthenticationProviderTest {
 
 	/**
 	 * Sign in test.
+	 * 
+	 * @throws UndefinedOwnerException
 	 */
 	@Test
-	public void signInTest() {
-		final boolean result = authProvider.signIn(OWNER_ID, PASSWORD);
-		Assert.assertTrue(result);
+	public void signInTest() throws UndefinedOwnerException {
+		final Owner result = authProvider.signIn(OWNER_ID, PASSWORD);
+		Assert.assertNotNull(result);
 	}
 
 	/**

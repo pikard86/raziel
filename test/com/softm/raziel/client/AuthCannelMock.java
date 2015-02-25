@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -14,12 +14,11 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.test;
+package com.softm.raziel.client;
 
 import java.util.HashMap;
 
 import com.softm.raziel.Owner;
-import com.softm.raziel.client.AuthenticationChannel;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
@@ -39,11 +38,13 @@ public class AuthCannelMock implements AuthenticationChannel {
 	 * java.lang.String)
 	 */
 	@Override
-	public boolean doSignIn(final String ownerId,
-			final String authenticationToken) {
+	public Owner doSignIn(final String ownerId, final String authenticationToken) {
 		final Owner owner = owners.get(ownerId);
-		return owner != null
-				&& owner.getAuthenticationToken().equals(authenticationToken);
+		if (owner != null
+				&& owner.getAuthenticationToken().equals(authenticationToken)) {
+			return owner;
+		}
+		return null;
 	}
 
 	/*

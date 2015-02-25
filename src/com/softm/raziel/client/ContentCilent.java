@@ -25,27 +25,37 @@ import com.softm.raziel.crypt.RSACyperUtil;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ContentCilent.
  */
 public class ContentCilent {
 
+	/** The content channel. */
 	private final ContentChannel contentChannel;
-	private final AuthenticatedSession session;
 
 	/**
 	 * Instantiates a new content cilent.
 	 *
 	 * @param contentChannel
 	 *            the content channel
+	 * @param session
+	 *            the session
 	 */
-	public ContentCilent(final ContentChannel contentChannel,
-			final AuthenticatedSession session) {
+	public ContentCilent(final ContentChannel contentChannel) {
 		this.contentChannel = contentChannel;
-		this.session = session;
 	}
 
-	public <T extends Serializable> void storeContent(final T plainContent) {
+	/**
+	 * Store content.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param plainContent
+	 *            the plain content
+	 */
+	public <T extends Serializable> void storeContent(final T plainContent,
+			final AuthenticatedSession session) {
 
 		final Owner owner = session.getOwner();
 		final String ownerId = owner.getId();

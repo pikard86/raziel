@@ -14,20 +14,19 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.test;
+package com.softm.raziel;
 
 import java.util.Date;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.softm.raziel.Owner;
-import com.softm.raziel.OwnerFactory;
 import com.softm.raziel.client.AuthenticatedSession;
 import com.softm.raziel.client.ContentChannel;
 import com.softm.raziel.client.ContentCilent;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
+import com.softm.raziel.payload.Message;
 
 public class ContentServiceClientTest {
 
@@ -44,10 +43,9 @@ public class ContentServiceClientTest {
 		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);
 		final AuthenticatedSession session = new AuthenticatedSession(owner);
 
-		final ContentCilent contentClient = new ContentCilent(contentChannel,
-				session);
+		final ContentCilent contentClient = new ContentCilent(contentChannel);
 		final Message message = new Message("Hello bob", new Date());
 
-		contentClient.storeContent(message);
+		contentClient.storeContent(message, session);
 	}
 }

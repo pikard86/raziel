@@ -1,4 +1,4 @@
-package com.softm.raziel.test;
+package com.softm.raziel.payload;
 
 import java.io.Serializable;
 import java.util.Date;
