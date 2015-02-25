@@ -21,7 +21,7 @@ import java.util.UUID;
 import com.softm.raziel.Owner;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
-import com.softm.raziel.crypt.RSACofferKey;
+import com.softm.raziel.crypt.RSACyperUtil;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 import com.softm.raziel.payload.Treasure;
@@ -57,40 +57,35 @@ public class ContentCilent {
 	 *            the shared coffer id
 	 * @return the coffer
 	 */
-	private Coffer<ContentTicket> generateTicket(final byte[] publicKey,
+	private ContentTicket generateTicket(final byte[] publicKey,
 			final CofferKey contentKey, final long sharedCofferId) {
-		final RSACofferKey tiketKey = new RSACofferKey();
-		tiketKey.setPublicKey(publicKey);
+
 		final ContentTicket ticket = new ContentTicket();
-		ticket.setSharedCofferId(sharedCofferId);
-		ticket.setKey(contentKey);
-		final Coffer<ContentTicket> tiketCoffer = new Coffer<ContentTicket>();
-		tiketCoffer.setTreasure(ticket);
-		tiketCoffer.lock(tiketKey);
-		return tiketCoffer;
+
+		return ticket;
 	}
 
 	public void storeContent(final Treasure plainContent) {
 
 		final Owner owner = session.getOwner();
+		final String ownerId = owner.getId();
 		final byte[] publicKey = owner.getPublicKey();
 
-		final CofferKey contentKey = new AESCofferKey(UUID.randomUUID()
-				.toString().getBytes());
+		final String randomPassword = UUID.randomUUID().toString();
+		final AESCofferKey contentKey = new AESCofferKey(randomPassword);
+
 		final Coffer<Treasure> contentCoffer = new Coffer<Treasure>();
 		contentCoffer.setTreasure(plainContent);
 		contentCoffer.lock(contentKey);
 
 		final long sharedCofferId = contentChannel.storeCoffer(contentCoffer);
-		final String ownerId = owner.getId();
 
-		final Coffer<ContentTicket> tiketCoffer = generateTicket(publicKey,
-				contentKey, sharedCofferId);
-		final long tiketId = contentChannel.issueContentTicket(ownerId,
-				tiketCoffer);
+		final ContentTicket tiket = new ContentTicket();
+		tiket.setSharedCofferId(sharedCofferId);
+		tiket.setTicket(RSACyperUtil.generateTicket(contentKey, publicKey));
+		final long tiketId = contentChannel.issueContentTicket(ownerId, tiket);
 
 		owner.addTiket(tiketId);
-
 	}
 
 }

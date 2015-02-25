@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -16,13 +16,13 @@
  */
 package com.softm.raziel.payload;
 
-import com.softm.raziel.crypt.CofferKey;
+import java.io.Serializable;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SharedContent.
  */
-public class ContentTicket extends Treasure {
+public class ContentTicket implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7497300550265891449L;
@@ -31,16 +31,10 @@ public class ContentTicket extends Treasure {
 	private long sharedCofferId;
 
 	/** The key. */
-	private CofferKey key;
-
 	/**
-	 * Gets the key.
 	 *
-	 * @return the key
 	 */
-	public CofferKey getKey() {
-		return key;
-	}
+	private byte[] ticket;
 
 	/**
 	 * Gets the shared coffer id.
@@ -52,13 +46,12 @@ public class ContentTicket extends Treasure {
 	}
 
 	/**
-	 * Sets the key.
+	 * Gets the ticket.
 	 *
-	 * @param key
-	 *            the new key
+	 * @return the ticket
 	 */
-	public void setKey(final CofferKey key) {
-		this.key = key;
+	public byte[] getTicket() {
+		return ticket;
 	}
 
 	/**
@@ -70,4 +63,15 @@ public class ContentTicket extends Treasure {
 	public void setSharedCofferId(final long sharedCofferId) {
 		this.sharedCofferId = sharedCofferId;
 	}
+
+	/**
+	 * Sets the ticket.
+	 *
+	 * @param ticket
+	 *            the new ticket
+	 */
+	public void setTicket(final byte[] ticket) {
+		this.ticket = ticket;
+	}
+
 }

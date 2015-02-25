@@ -16,13 +16,11 @@
  */
 package com.softm.raziel;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
+import com.softm.raziel.crypt.AsymmetricKey;
 import com.softm.raziel.crypt.CofferKey;
-import com.softm.raziel.crypt.RSACofferKey;
+import com.softm.raziel.crypt.RSACyperUtil;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
@@ -59,13 +57,13 @@ public class OwnerFactory {
 		authTreasure.setAuthenticationToken(authenticationToken);
 
 		/*
-		 * Obtains the CofferKey
+		 * Obtains the asymmetric key
 		 */
-		final RSACofferKey key = getCofferKey();
+		final AsymmetricKey asymmetricKey = RSACyperUtil.getCofferKey();
 		/*
 		 * Put the key into the treasure
 		 */
-		authTreasure.setBaseKey(key);
+		authTreasure.setAsymmetricKey(asymmetricKey);
 		/*
 		 * Store the treasure into the coffer
 		 */
@@ -75,7 +73,7 @@ public class OwnerFactory {
 		 */
 		authCoffer.lock(ownerKey);
 		owner.setId(ownerId);
-		owner.setPublicKey(key.getPublicKey());
+		owner.setPublicKey(asymmetricKey.getPublicKey());
 		owner.setAuthenticationCoffer(authCoffer);
 		owner.setAuthenticationToken(authenticationToken);
 		return owner;
@@ -88,34 +86,6 @@ public class OwnerFactory {
 	 */
 	protected static String getAuthenticationToken() {
 		return UUID.randomUUID().toString();
-	}
-
-	/**
-	 * Gets the coffer key.
-	 *
-	 * @return the coffer key
-	 */
-	protected static RSACofferKey getCofferKey() {
-		try {
-
-			final KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-			kpg.initialize(1024);
-			final KeyPair kp = kpg.generateKeyPair();
-			// X.509
-			final byte[] publicKey = kp.getPublic().getEncoded();
-			// PKCS#8
-			final byte[] privateKey = kp.getPrivate().getEncoded();
-
-			final RSACofferKey cofferKey = new RSACofferKey(privateKey,
-					publicKey);
-
-			return cofferKey;
-
-		} catch (final NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

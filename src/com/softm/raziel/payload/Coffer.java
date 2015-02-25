@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -15,6 +15,13 @@
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
 package com.softm.raziel.payload;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import com.softm.raziel.crypt.CofferKey;
 
@@ -35,6 +42,9 @@ public class Coffer<T extends Treasure> {
 
 	/** The treasure. */
 	private T treasure;
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -7396530147151236165L;
 
 	/**
 	 * Gets the encrypted bytes.
@@ -64,6 +74,59 @@ public class Coffer<T extends Treasure> {
 	}
 
 	/**
+	 * Gets the bytes.
+	 *
+	 * @return the bytes
+	 */
+	public byte[] getTreasureBytes() {
+		final ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectOutputStream objectStream = null;
+		byte[] treasureBytes = null;
+		try {
+			objectStream = new ObjectOutputStream(out);
+			objectStream.writeObject(treasure);
+			treasureBytes = out.toByteArray();
+
+		} catch (final IOException e) {
+			throw new RuntimeException(e);
+			// TODO bubble the exception
+		} finally {
+			try {
+				if (objectStream != null) {
+					objectStream.close();
+				}
+				out.close();
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return treasureBytes;
+	}
+
+	public T inflateTreasure(final byte[] treasureBytes) {
+		final InputStream inputStream = new ByteArrayInputStream(treasureBytes);
+		try {
+			final ObjectInputStream objectInputStream = new ObjectInputStream(
+					inputStream);
+			try {
+				final Object obj = objectInputStream.readObject();
+				if (obj instanceof Treasure) {
+					final T treasure = (T) obj;
+					return treasure;
+				}
+			} catch (final ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (final IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// TODO: throw a custom exception
+		return null;
+	}
+
+	/**
 	 * Lock.
 	 *
 	 * @param key
@@ -71,7 +134,7 @@ public class Coffer<T extends Treasure> {
 	 */
 	public void lock(final CofferKey key) {
 		key.lockCoffer(this);
-	}
+	};
 
 	/**
 	 * Open.
@@ -101,7 +164,7 @@ public class Coffer<T extends Treasure> {
 	 */
 	public void setId(final long id) {
 		this.id = id;
-	};
+	}
 
 	/**
 	 * Sets the treasure.

@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -16,7 +16,7 @@
  */
 package com.softm.raziel.payload;
 
-import com.softm.raziel.crypt.CofferKey;
+import com.softm.raziel.crypt.AsymmetricKey;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,7 +31,16 @@ public class AuthenticationTreasure extends Treasure {
 	private String authenticationToken;
 
 	/** The base key. */
-	private CofferKey baseKey;
+	private AsymmetricKey asymmetricKey;
+
+	/**
+	 * Gets the asymmetric key.
+	 *
+	 * @return the asymmetric key
+	 */
+	public AsymmetricKey getAsymmetricKey() {
+		return asymmetricKey;
+	}
 
 	/**
 	 * Gets the authentication token.
@@ -43,12 +52,13 @@ public class AuthenticationTreasure extends Treasure {
 	}
 
 	/**
-	 * Gets the base key.
+	 * Sets the asymmetric key.
 	 *
-	 * @return the base key
+	 * @param asymmetricKey
+	 *            the new asymmetric key
 	 */
-	public CofferKey getBaseKey() {
-		return baseKey;
+	public void setAsymmetricKey(final AsymmetricKey asymmetricKey) {
+		this.asymmetricKey = asymmetricKey;
 	}
 
 	/**
@@ -59,16 +69,6 @@ public class AuthenticationTreasure extends Treasure {
 	 */
 	public void setAuthenticationToken(final String autenticationToken) {
 		authenticationToken = autenticationToken;
-	}
-
-	/**
-	 * Sets the base key.
-	 *
-	 * @param baseKey
-	 *            the new base key
-	 */
-	public void setBaseKey(final CofferKey baseKey) {
-		this.baseKey = baseKey;
 	}
 
 }

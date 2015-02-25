@@ -28,14 +28,14 @@ public interface ContentChannel {
 
 	/**
 	 * Store content ticket.
-	 * 
+	 *
 	 * @param ownerId
 	 *
 	 * @param tiketCoffer
 	 *            the tiket coffer
 	 * @return the long
 	 */
-	long issueContentTicket(String ownerId, Coffer<ContentTicket> tiketCoffer);
+	long issueContentTicket(String ownerId, ContentTicket tiketCoffer);
 
 	/**
 	 * On content share.
