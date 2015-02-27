@@ -40,13 +40,24 @@ public class ContentCilent {
 	 *
 	 * @param contentChannel
 	 *            the content channel
-	 * @param session
-	 *            the session
 	 */
 	public ContentCilent(final ContentChannel contentChannel) {
 		this.contentChannel = contentChannel;
 	}
 
+	/**
+	 * Gets the content.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param contentId
+	 *            the content id
+	 * @param session
+	 *            the session
+	 * @return the content
+	 * @throws ContentException
+	 *             the content exception
+	 */
 	public <T extends Serializable> T getContent(final long contentId,
 			final AuthenticatedSession session) throws ContentException {
 		final Owner owner = session.getOwner();
@@ -77,7 +88,9 @@ public class ContentCilent {
 	 *            the generic type
 	 * @param plainContent
 	 *            the plain content
-	 * @return
+	 * @param session
+	 *            the session
+	 * @return the long
 	 */
 	public <T extends Serializable> long storeContent(final T plainContent,
 			final AuthenticatedSession session) {
@@ -99,8 +112,6 @@ public class ContentCilent {
 		tiket.setSharedCofferId(sharedCofferId);
 		tiket.setTicket(RSACyperUtil.generateTicket(contentKey, publicKey));
 		final long tiketId = contentChannel.issueContentTicket(ownerId, tiket);
-
-		owner.addTiket(tiketId);
 		return sharedCofferId;
 	}
 

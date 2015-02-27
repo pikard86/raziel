@@ -104,6 +104,12 @@ public class Coffer<T extends Serializable> {
 		return treasureBytes;
 	}
 
+	/**
+	 * Inflate treasure.
+	 *
+	 * @param treasureBytes the treasure bytes
+	 * @return the t
+	 */
 	private T inflateTreasure(final byte[] treasureBytes) {
 		final InputStream inputStream = new ByteArrayInputStream(treasureBytes);
 		try {

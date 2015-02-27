@@ -14,24 +14,11 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.exceptions;
+package com.softm.raziel.server;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AuthenticationRequiredException.
+ * The Class ContentService.
  */
-public class AuthenticationRequiredException extends Exception {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 2197542970137131820L;
-
-	/**
-	 * Instantiates a new authentication required exception.
-	 *
-	 * @param msg the msg
-	 */
-	public AuthenticationRequiredException(final String msg) {
-		super(msg);
-	}
+public class ContentService {
 
 }

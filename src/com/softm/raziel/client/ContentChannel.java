@@ -30,6 +30,8 @@ public interface ContentChannel {
 	/**
 	 * Gets the coffer.
 	 *
+	 * @param <T>
+	 *            the generic type
 	 * @param contentId
 	 *            the content id
 	 * @return the coffer
@@ -72,6 +74,8 @@ public interface ContentChannel {
 	/**
 	 * Store.
 	 *
+	 * @param <T>
+	 *            the generic type
 	 * @param contentCoffer
 	 *            the content coffer
 	 * @return the long

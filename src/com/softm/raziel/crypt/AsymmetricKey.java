@@ -24,6 +24,8 @@ import java.io.Serializable;
  * The Class AsimmetricKey.
  */
 public class AsymmetricKey implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5219937819748791210L;
 
 	/** The private key. */

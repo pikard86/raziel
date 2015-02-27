@@ -30,10 +30,7 @@ public class ContentTicket implements Serializable {
 	/** The shared coffer id. */
 	private long sharedCofferId;
 
-	/** The key. */
-	/**
-	 *
-	 */
+	/** The ticket. */
 	private byte[] ticket;
 
 	/**

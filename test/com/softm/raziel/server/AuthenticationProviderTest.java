@@ -59,8 +59,8 @@ public class AuthenticationProviderTest {
 
 	/**
 	 * Sign in test.
-	 * 
-	 * @throws UndefinedOwnerException
+	 *
+	 * @throws UndefinedOwnerException the undefined owner exception
 	 */
 	@Test
 	public void signInTest() throws UndefinedOwnerException {

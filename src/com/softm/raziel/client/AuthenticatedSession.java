@@ -30,9 +30,21 @@ public class AuthenticatedSession {
 
 	/** The owner. */
 	private final Owner owner;
+
+	/** The password. */
 	private final String password;
+
+	/** The asymmetric key. */
 	private AsymmetricKey asymmetricKey;
 
+	/**
+	 * Instantiates a new authenticated session.
+	 *
+	 * @param owner
+	 *            the owner
+	 * @param password
+	 *            the password
+	 */
 	public AuthenticatedSession(final Owner owner, final String password) {
 		super();
 		this.owner = owner;
@@ -40,6 +52,9 @@ public class AuthenticatedSession {
 		extractAsymmetricKey();
 	}
 
+	/**
+	 * Extract asymmetric key.
+	 */
 	private void extractAsymmetricKey() {
 		final Coffer<AuthenticationTreasure> authenticationCoffer = owner
 				.getAuthenticationCoffer();
@@ -58,6 +73,11 @@ public class AuthenticatedSession {
 		return owner;
 	}
 
+	/**
+	 * Gets the owner privete key.
+	 *
+	 * @return the owner privete key
+	 */
 	public byte[] getOwnerPriveteKey() {
 		return asymmetricKey.getPrivateKey();
 	}

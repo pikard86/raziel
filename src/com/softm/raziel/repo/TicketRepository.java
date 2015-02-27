@@ -14,24 +14,35 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel.exceptions;
+package com.softm.raziel.repo;
+
+import com.softm.raziel.payload.ContentTicket;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AuthenticationRequiredException.
+ * The Interface TicketRepository.
  */
-public class AuthenticationRequiredException extends Exception {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 2197542970137131820L;
+public interface TicketRepository {
 
 	/**
-	 * Instantiates a new authentication required exception.
+	 * Find tiket.
 	 *
-	 * @param msg the msg
+	 * @param ownerId
+	 *            the owner id
+	 * @param cofferId
+	 *            the coffer id
+	 * @return the content ticket
 	 */
-	public AuthenticationRequiredException(final String msg) {
-		super(msg);
-	}
+	ContentTicket findTiket(String ownerId, long cofferId);
 
+	/**
+	 * Store ticket for owner.
+	 *
+	 * @param ownerId
+	 *            the owner id
+	 * @param ticket
+	 *            the ticket
+	 * @return the long
+	 */
+	long storeTicketForOwner(String ownerId, ContentTicket ticket);
 }

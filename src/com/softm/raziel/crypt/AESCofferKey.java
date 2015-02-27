@@ -73,6 +73,11 @@ public class AESCofferKey extends CofferKey {
 		this.secretKey = secretKey;
 	}
 
+	/**
+	 * Instantiates a new AES coffer key.
+	 *
+	 * @param password the password
+	 */
 	public AESCofferKey(final String password) {
 		this(password.getBytes());
 	}
@@ -122,6 +127,9 @@ public class AESCofferKey extends CofferKey {
 		return cipher;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.softm.raziel.crypt.CofferKey#lockCoffer(byte[])
+	 */
 	@Override
 	public byte[] lockCoffer(final byte[] treasureBytes) {
 		try {
@@ -135,6 +143,9 @@ public class AESCofferKey extends CofferKey {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.softm.raziel.crypt.CofferKey#openCoffer(byte[])
+	 */
 	@Override
 	public byte[] openCoffer(final byte[] encryptedBytes) {
 		try {

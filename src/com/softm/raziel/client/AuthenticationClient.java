@@ -67,6 +67,7 @@ public class AuthenticationClient {
 	 *            the password
 	 * @return true, if successful
 	 * @throws UndefinedOwnerException
+	 *             the undefined owner exception
 	 */
 	public Owner signIn(final String ownerId, final String password)
 			throws UndefinedOwnerException {

@@ -1,3 +1,19 @@
+/*
+ *   Raziel - The Agnostic Library for authentication and private content sharing
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the General Pizzurro License as published by
+ *   the Pizzurro Free Software Foundation, either version 1 of the License
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   General Pizzurro License for more details.
+ *
+ *   You should have received a copy of the General Pizzurro License
+ *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
+ */
 package com.softm.raziel.client;
 
 import java.util.Date;
@@ -18,12 +34,28 @@ import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 import com.softm.raziel.payload.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientTest.
+ */
 public class ClientTest {
 
+	/**
+	 * Client sign in test.
+	 *
+	 * @throws WrongOwnerCredentialException
+	 *             the wrong owner credential exception
+	 * @throws AuthenticationRequiredException
+	 *             the authentication required exception
+	 * @throws UndefinedOwnerException
+	 *             the undefined owner exception
+	 * @throws ContentException
+	 *             the content exception
+	 */
 	@Test
 	public void clientSignInTest() throws WrongOwnerCredentialException,
-	AuthenticationRequiredException, UndefinedOwnerException,
-	ContentException {
+			AuthenticationRequiredException, UndefinedOwnerException,
+			ContentException {
 		final AuthenticationChannel authenticationChannel = Mockito
 				.mock(AuthenticationChannel.class);
 
@@ -47,7 +79,7 @@ public class ClientTest {
 				authenticationChannel.doSignIn(ownerId, authenticationToken))
 				.thenReturn(owner);
 		Mockito.when(authenticationChannel.getAuthenticationCoffer(ownerId))
-		.thenReturn(owner.getAuthenticationCoffer());
+				.thenReturn(owner.getAuthenticationCoffer());
 
 		client.signIn(ownerId, password);
 
@@ -55,7 +87,7 @@ public class ClientTest {
 
 		final Long mockContentID = new Long(112);
 		Mockito.when(contentChannel.storeCoffer(Mockito.any(Coffer.class)))
-		.thenReturn(mockContentID);
+				.thenReturn(mockContentID);
 		final ArgumentCaptor<ContentTicket> ticketCaptor = ArgumentCaptor
 				.forClass(ContentTicket.class);
 
@@ -66,7 +98,7 @@ public class ClientTest {
 		Mockito.verify(contentChannel).issueContentTicket(Mockito.anyString(),
 				ticketCaptor.capture());
 		Mockito.when(contentChannel.getTicket(mockContentID, ownerId))
-		.thenReturn(ticketCaptor.getValue());
+				.thenReturn(ticketCaptor.getValue());
 
 		Mockito.verify(contentChannel).storeCoffer(cofferCaptor.capture());
 		Mockito.when(contentChannel.getCoffer(mockContentID)).thenReturn(

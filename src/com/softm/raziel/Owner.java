@@ -16,9 +16,6 @@
  */
 package com.softm.raziel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
@@ -39,13 +36,6 @@ public class Owner {
 
 	/** The public key. */
 	private byte[] publicKey;
-
-	/** The owned coffers. */
-	private List<Long> ownedTikets = new ArrayList<Long>();
-
-	public void addTiket(final long tiketId) {
-		ownedTikets.add(tiketId);
-	}
 
 	/**
 	 * Gets the authentication coffer.
@@ -72,15 +62,6 @@ public class Owner {
 	 */
 	public String getId() {
 		return id;
-	}
-
-	/**
-	 * Gets the owned tikets.
-	 *
-	 * @return the owned tikets
-	 */
-	public List<Long> getOwnedTikets() {
-		return ownedTikets;
 	}
 
 	/**
@@ -121,16 +102,6 @@ public class Owner {
 	 */
 	public void setId(final String id) {
 		this.id = id;
-	}
-
-	/**
-	 * Sets the owned tikets.
-	 *
-	 * @param ownedTikets
-	 *            the new owned tikets
-	 */
-	public void setOwnedTikets(final List<Long> ownedTikets) {
-		this.ownedTikets = ownedTikets;
 	}
 
 	/**

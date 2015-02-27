@@ -28,12 +28,21 @@ import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.payload.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceClientTest.
+ */
 public class ContentServiceClientTest {
 
+	/** The Constant PASSWORD. */
 	private static final String PASSWORD = "password";
 
+	/** The Constant OWNER_ID. */
 	private static final String OWNER_ID = "BOB";
 
+	/**
+	 * Store content test.
+	 */
 	@Test
 	public void storeContentTest() {
 		final ContentChannel contentChannel = Mockito
