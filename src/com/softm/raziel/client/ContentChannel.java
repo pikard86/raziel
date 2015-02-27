@@ -16,6 +16,8 @@
  */
 package com.softm.raziel.client;
 
+import java.io.Serializable;
+
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
@@ -26,10 +28,30 @@ import com.softm.raziel.payload.ContentTicket;
 public interface ContentChannel {
 
 	/**
+	 * Gets the coffer.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @return the coffer
+	 */
+	<T extends Serializable> Coffer<T> getCoffer(long contentId);
+
+	/**
+	 * Gets the ticket.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @param id
+	 *            the id
+	 * @return the ticket
+	 */
+	ContentTicket getTicket(long contentId, String id);
+
+	/**
 	 * Store content ticket.
 	 *
 	 * @param ownerId
-	 *
+	 *            the owner id
 	 * @param tiketCoffer
 	 *            the tiket coffer
 	 * @return the long
@@ -54,5 +76,5 @@ public interface ContentChannel {
 	 *            the content coffer
 	 * @return the long
 	 */
-	long storeCoffer(Coffer<?> contentCoffer);
+	<T extends Serializable> long storeCoffer(Coffer<T> contentCoffer);
 }

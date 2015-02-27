@@ -17,6 +17,10 @@
 package com.softm.raziel.client;
 
 import com.softm.raziel.Owner;
+import com.softm.raziel.crypt.AESCofferKey;
+import com.softm.raziel.crypt.AsymmetricKey;
+import com.softm.raziel.payload.AuthenticationTreasure;
+import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,10 +30,23 @@ public class AuthenticatedSession {
 
 	/** The owner. */
 	private final Owner owner;
+	private final String password;
+	private AsymmetricKey asymmetricKey;
 
-	public AuthenticatedSession(final Owner owner) {
+	public AuthenticatedSession(final Owner owner, final String password) {
 		super();
 		this.owner = owner;
+		this.password = password;
+		extractAsymmetricKey();
+	}
+
+	private void extractAsymmetricKey() {
+		final Coffer<AuthenticationTreasure> authenticationCoffer = owner
+				.getAuthenticationCoffer();
+		if (authenticationCoffer.getTreasure() == null) {
+			authenticationCoffer.open(new AESCofferKey(password));
+		}
+		asymmetricKey = authenticationCoffer.getTreasure().getAsymmetricKey();
 	}
 
 	/**
@@ -39,6 +56,10 @@ public class AuthenticatedSession {
 	 */
 	public Owner getOwner() {
 		return owner;
+	}
+
+	public byte[] getOwnerPriveteKey() {
+		return asymmetricKey.getPrivateKey();
 	}
 
 }

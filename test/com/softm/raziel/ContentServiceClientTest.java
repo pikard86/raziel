@@ -41,7 +41,8 @@ public class ContentServiceClientTest {
 		final byte[] key = PASSWORD.getBytes();
 		final CofferKey ownerKey = new AESCofferKey(key);
 		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);
-		final AuthenticatedSession session = new AuthenticatedSession(owner);
+		final AuthenticatedSession session = new AuthenticatedSession(owner,
+				PASSWORD);
 
 		final ContentCilent contentClient = new ContentCilent(contentChannel);
 		final Message message = new Message("Hello bob", new Date());

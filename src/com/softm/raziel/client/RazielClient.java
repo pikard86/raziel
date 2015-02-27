@@ -22,6 +22,7 @@ import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.exceptions.AuthenticationRequiredException;
+import com.softm.raziel.exceptions.ContentException;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
 import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 
@@ -32,13 +33,26 @@ import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 public class RazielClient {
 
 	/** The session. */
-	AuthenticatedSession session;
+	private AuthenticatedSession session;
 
 	/** The authentication client. */
-	AuthenticationClient authenticationClient;
+	private AuthenticationClient authenticationClient;
 
 	/** The content cilent. */
-	ContentCilent contentCilent;
+	private ContentCilent contentCilent;
+
+	/**
+	 * Check session.
+	 *
+	 * @throws AuthenticationRequiredException
+	 *             the authentication required exception
+	 */
+	private void checkSession() throws AuthenticationRequiredException {
+		if (session == null) {
+			throw new AuthenticationRequiredException(
+					"Unable to store content autentication required do SignIn/SignOn before");
+		}
+	}
 
 	/**
 	 * Gets the authentication client.
@@ -47,6 +61,23 @@ public class RazielClient {
 	 */
 	public AuthenticationClient getAuthenticationClient() {
 		return authenticationClient;
+	}
+
+	/**
+	 * Gets the content.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @return the content
+	 * @throws AuthenticationRequiredException
+	 *             the authentication required exception
+	 * @throws ContentException
+	 *             the content exception
+	 */
+	public Serializable getContent(final long contentId)
+			throws AuthenticationRequiredException, ContentException {
+		checkSession();
+		return contentCilent.getContent(contentId, session);
 	}
 
 	/**
@@ -108,12 +139,13 @@ public class RazielClient {
 	 * @throws WrongOwnerCredentialException
 	 *             the wrong owner credential exception
 	 * @throws UndefinedOwnerException
+	 *             the undefined owner exception
 	 */
 	public void signIn(final String ownerId, final String password)
 			throws WrongOwnerCredentialException, UndefinedOwnerException {
 		final Owner owner = authenticationClient.signIn(ownerId, password);
 		if (owner != null) {
-			session = new AuthenticatedSession(owner);
+			session = new AuthenticatedSession(owner, password);
 		} else {
 			throw new WrongOwnerCredentialException(ownerId);
 		}
@@ -132,7 +164,7 @@ public class RazielClient {
 		final Owner owner = OwnerFactory.createOwner(ownerId, key);
 		final boolean signOn = authenticationClient.signOn(owner);
 		if (signOn) {
-			session = new AuthenticatedSession(owner);
+			session = new AuthenticatedSession(owner, password);
 		}
 	}
 
@@ -143,14 +175,13 @@ public class RazielClient {
 	 *            the generic type
 	 * @param content
 	 *            the content
+	 * @return the long
 	 * @throws AuthenticationRequiredException
+	 *             the authentication required exception
 	 */
-	public <T extends Serializable> void storeContent(final T content)
+	public <T extends Serializable> long storeContent(final T content)
 			throws AuthenticationRequiredException {
-		if (session == null) {
-			throw new AuthenticationRequiredException(
-					"Unable to store content autentication required do SignIn/SignOn before");
-		}
-		contentCilent.storeContent(content, session);
+		checkSession();
+		return contentCilent.storeContent(content, session);
 	}
 }

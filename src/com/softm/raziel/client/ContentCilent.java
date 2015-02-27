@@ -22,6 +22,7 @@ import java.util.UUID;
 import com.softm.raziel.Owner;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.RSACyperUtil;
+import com.softm.raziel.exceptions.ContentException;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
@@ -46,6 +47,29 @@ public class ContentCilent {
 		this.contentChannel = contentChannel;
 	}
 
+	public <T extends Serializable> T getContent(final long contentId,
+			final AuthenticatedSession session) throws ContentException {
+		final Owner owner = session.getOwner();
+		final byte[] privateKey = session.getOwnerPriveteKey();
+		final ContentTicket ticket = contentChannel.getTicket(contentId,
+				owner.getId());
+		if (ticket == null) {
+			throw new ContentException(
+					"Unable to retreive ticket for content id :" + contentId);
+		}
+		final Coffer<T> contentCoffer = contentChannel.getCoffer(contentId);
+		if (contentCoffer == null) {
+			throw new ContentException("Unable to find coffer id : "
+					+ contentId);
+		}
+
+		final AESCofferKey key = RSACyperUtil.getKeyFromTicket(ticket,
+				privateKey);
+		contentCoffer.open(key);
+
+		return contentCoffer.getTreasure();
+	}
+
 	/**
 	 * Store content.
 	 *
@@ -53,8 +77,9 @@ public class ContentCilent {
 	 *            the generic type
 	 * @param plainContent
 	 *            the plain content
+	 * @return
 	 */
-	public <T extends Serializable> void storeContent(final T plainContent,
+	public <T extends Serializable> long storeContent(final T plainContent,
 			final AuthenticatedSession session) {
 
 		final Owner owner = session.getOwner();
@@ -76,6 +101,7 @@ public class ContentCilent {
 		final long tiketId = contentChannel.issueContentTicket(ownerId, tiket);
 
 		owner.addTiket(tiketId);
+		return sharedCofferId;
 	}
 
 }
