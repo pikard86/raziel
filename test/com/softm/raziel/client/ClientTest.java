@@ -16,6 +16,10 @@
  */
 package com.softm.raziel.client;
 
+import static org.mockito.ArgumentCaptor.forClass;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.Date;
 
 import org.junit.Test;
@@ -88,20 +92,17 @@ public class ClientTest {
 		final Long mockContentID = new Long(112);
 		Mockito.when(contentChannel.storeCoffer(Mockito.any(Coffer.class)))
 				.thenReturn(mockContentID);
-		final ArgumentCaptor<ContentTicket> ticketCaptor = ArgumentCaptor
-				.forClass(ContentTicket.class);
-
-		final ArgumentCaptor<Coffer> cofferCaptor = ArgumentCaptor
-				.forClass(Coffer.class);
 
 		final long contentId = client.storeContent(msg);
-		Mockito.verify(contentChannel).issueContentTicket(Mockito.anyString(),
+		final ArgumentCaptor<ContentTicket> ticketCaptor = forClass(ContentTicket.class);
+		verify(contentChannel).issueContentTicket(Mockito.anyString(),
 				ticketCaptor.capture());
-		Mockito.when(contentChannel.getTicket(mockContentID, ownerId))
-				.thenReturn(ticketCaptor.getValue());
+		when(contentChannel.getTicket(mockContentID, ownerId)).thenReturn(
+				ticketCaptor.getValue());
 
-		Mockito.verify(contentChannel).storeCoffer(cofferCaptor.capture());
-		Mockito.when(contentChannel.getCoffer(mockContentID)).thenReturn(
+		final ArgumentCaptor<Coffer> cofferCaptor = forClass(Coffer.class);
+		verify(contentChannel).storeCoffer(cofferCaptor.capture());
+		when(contentChannel.getCoffer(mockContentID)).thenReturn(
 				cofferCaptor.getValue());
 		final Message retreivaedMsg = (Message) client.getContent(contentId);
 		org.junit.Assert.assertEquals(msg, retreivaedMsg);

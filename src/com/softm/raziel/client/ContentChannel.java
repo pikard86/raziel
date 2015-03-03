@@ -17,7 +17,9 @@
 package com.softm.raziel.client;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.softm.raziel.Owner;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
@@ -38,16 +40,18 @@ public interface ContentChannel {
 	 */
 	<T extends Serializable> Coffer<T> getCoffer(long contentId);
 
+	List<Owner> getOwnersByIds(List<String> recipientsIds);
+
 	/**
 	 * Gets the ticket.
 	 *
 	 * @param contentId
 	 *            the content id
-	 * @param id
+	 * @param ownerId
 	 *            the id
 	 * @return the ticket
 	 */
-	ContentTicket getTicket(long contentId, String id);
+	ContentTicket getTicket(long contentId, String ownerId);
 
 	/**
 	 * Store content ticket.
