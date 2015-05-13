@@ -107,7 +107,8 @@ public class Coffer<T extends Serializable> {
 	/**
 	 * Inflate treasure.
 	 *
-	 * @param treasureBytes the treasure bytes
+	 * @param treasureBytes
+	 *            the treasure bytes
 	 * @return the t
 	 */
 	private T inflateTreasure(final byte[] treasureBytes) {
@@ -149,10 +150,13 @@ public class Coffer<T extends Serializable> {
 	 *            the key
 	 */
 	public void open(final CofferKey key) {
-		final byte[] decriptedBytes = key.openCoffer(this.getEncryptedBytes());
-		final T inflatedTreasure = inflateTreasure(decriptedBytes);
-		setTreasure(inflatedTreasure);
-		setEncryptedBytes(null);
+		if (this.getEncryptedBytes() != null) {
+			final byte[] decriptedBytes = key.openCoffer(this
+					.getEncryptedBytes());
+			final T inflatedTreasure = inflateTreasure(decriptedBytes);
+			setTreasure(inflatedTreasure);
+			setEncryptedBytes(null);
+		}
 	}
 
 	/**
