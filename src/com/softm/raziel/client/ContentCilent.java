@@ -26,7 +26,6 @@ import com.softm.raziel.Owner;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.RSACyperUtil;
 import com.softm.raziel.exceptions.ContentException;
-import com.softm.raziel.exceptions.MissingOwnersException;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
@@ -119,18 +118,22 @@ public class ContentCilent {
 	 *            the session
 	 * @param recipientsIds
 	 *            the recipients ids
+	 * @return
 	 * @throws ContentException
 	 *             the content exception
 	 */
-	public <T extends Serializable> void shareContent(final long contentId,
-			final AuthenticatedSession session, final List<String> recipientsIds)
-			throws ContentException {
+	public <T extends Serializable> Map<String, Long> shareContent(
+			final long contentId, final AuthenticatedSession session,
+			final List<Owner> owners) throws ContentException {
+		final Map<String, Long> contentIds = new HashMap<String, Long>();
+
 		final Serializable plainContent = getContent(contentId, session);
-		final List<Owner> owners = contentChannel.getOwnersByIds(recipientsIds);
 		for (final Owner recipient : owners) {
-			storeContentForOwner(plainContent, recipient.getId(),
-					recipient.getPublicKey());
+			final long storedContentId = storeContentForOwner(plainContent,
+					recipient.getId(), recipient.getPublicKey());
+			contentIds.put(recipient.getId(), storedContentId);
 		}
+		return contentIds;
 	}
 
 	/**
@@ -142,18 +145,13 @@ public class ContentCilent {
 	 *            the plain content
 	 * @param session
 	 *            the session
-	 * @param recipientsIds
-	 *            the recipients ids
-	 * @throws MissingOwnersException
+	 * @param owners
+	 *            the owners
+	 * @return the map
 	 */
 	public <T extends Serializable> Map<String, Long> shareContent(
 			final T plainContent, final AuthenticatedSession session,
-			final List<String> recipientsIds) throws MissingOwnersException {
-
-		final List<Owner> owners = contentChannel.getOwnersByIds(recipientsIds);
-		if (owners == null || owners.isEmpty()) {
-			throw new MissingOwnersException(recipientsIds);
-		}
+			final List<Owner> owners) {
 
 		final Map<String, Long> contentIds = new HashMap<String, Long>();
 

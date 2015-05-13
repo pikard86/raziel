@@ -16,16 +16,20 @@
  */
 package com.softm.raziel.server;
 
+import java.util.List;
+
 import com.softm.raziel.Owner;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
 import com.softm.raziel.exceptions.WrongOwnerCredentialException;
+import com.softm.raziel.payload.AuthenticationTreasure;
+import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.repo.OwnerRepository;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class .
  */
-public class AutenticationService {
+public class AuthenticationService {
 
 	/** The owner repository. */
 	private final OwnerRepository ownerRepository;
@@ -36,8 +40,26 @@ public class AutenticationService {
 	 * @param ownerRepository
 	 *            the owner repository
 	 */
-	public AutenticationService(final OwnerRepository ownerRepository) {
+	public AuthenticationService(final OwnerRepository ownerRepository) {
 		this.ownerRepository = ownerRepository;
+	}
+
+	/**
+	 * Gets the authentication coffer.
+	 *
+	 * @param ownerId
+	 *            the owner id
+	 * @return the authentication coffer
+	 * @throws UndefinedOwnerException
+	 *             the undefined owner exception
+	 */
+	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(
+			final String ownerId) throws UndefinedOwnerException {
+		final Owner owner = ownerRepository.findOwnerById(ownerId);
+		if (owner == null) {
+			throw new UndefinedOwnerException(ownerId);
+		}
+		return owner.getAuthenticationCoffer();
 	}
 
 	/**
@@ -49,6 +71,11 @@ public class AutenticationService {
 		return ownerRepository;
 	}
 
+	public List<Owner> getOwnersByIds(final List<String> ownerIds) {
+
+		return ownerRepository.findOwnersByIds(ownerIds);
+	}
+
 	/**
 	 * On sign in request.
 	 *
@@ -56,12 +83,13 @@ public class AutenticationService {
 	 *            the owner id
 	 * @param authenticationToken
 	 *            the authentication token
+	 * @return the owner
 	 * @throws UndefinedOwnerException
 	 *             the undefined owner exception
 	 * @throws WrongOwnerCredentialException
 	 *             the wrong owner credential exception
 	 */
-	public void onSignInRequest(final String ownerId,
+	public Owner onSignInRequest(final String ownerId,
 			final String authenticationToken) throws UndefinedOwnerException,
 			WrongOwnerCredentialException {
 		final Owner owner = ownerRepository.findOwnerById(ownerId);
@@ -71,6 +99,7 @@ public class AutenticationService {
 		if (!authenticationToken.equals(owner.getAuthenticationToken())) {
 			throw new WrongOwnerCredentialException(ownerId);
 		}
+		return owner;
 	}
 
 	/**
@@ -78,9 +107,12 @@ public class AutenticationService {
 	 *
 	 * @param owner
 	 *            the owner
+	 * @return true, if successful
 	 */
-	public void onSignOnRequest(final Owner owner) {
+	public boolean onSignOnRequest(final Owner owner) {
 		ownerRepository.store(owner);
+		// TODO: check store success
+		return true;
 	}
 
 }

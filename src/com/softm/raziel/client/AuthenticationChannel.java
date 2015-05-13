@@ -16,7 +16,11 @@
  */
 package com.softm.raziel.client;
 
+import java.util.List;
+
 import com.softm.raziel.Owner;
+import com.softm.raziel.exceptions.UndefinedOwnerException;
+import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
@@ -34,8 +38,11 @@ public interface AuthenticationChannel {
 	 * @param authenticationToken
 	 *            the authentication token
 	 * @return true, if successful
+	 * @throws WrongOwnerCredentialException
+	 * @throws UndefinedOwnerException
 	 */
-	public Owner doSignIn(String ownerId, String authenticationToken);
+	public Owner doSignIn(String ownerId, String authenticationToken)
+			throws UndefinedOwnerException, WrongOwnerCredentialException;
 
 	/**
 	 * Do sign on.
@@ -52,6 +59,17 @@ public interface AuthenticationChannel {
 	 * @param ownerId
 	 *            the owner id
 	 * @return the authentication coffer
+	 * @throws UndefinedOwnerException
 	 */
-	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(String ownerId);
+	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(String ownerId)
+			throws UndefinedOwnerException;
+
+	/**
+	 * Gets the owners by ids.
+	 *
+	 * @param recipientsIds
+	 *            the recipients ids
+	 * @return the owners by ids
+	 */
+	List<Owner> getOwnersByIds(List<String> recipientsIds);
 }

@@ -17,6 +17,7 @@
 package com.softm.raziel.payload;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,11 +28,52 @@ public class ContentTicket implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7497300550265891449L;
 
+	/** The id. */
+	private long id;
+
 	/** The shared coffer id. */
 	private long sharedCofferId;
 
 	/** The ticket. */
 	private byte[] ticket;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final ContentTicket other = (ContentTicket) obj;
+		if (id != other.id) {
+			return false;
+		}
+		if (sharedCofferId != other.sharedCofferId) {
+			return false;
+		}
+		if (!Arrays.equals(ticket, other.ticket)) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
 
 	/**
 	 * Gets the shared coffer id.
@@ -49,6 +91,32 @@ public class ContentTicket implements Serializable {
 	 */
 	public byte[] getTicket() {
 		return ticket;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ id >>> 32);
+		result = prime * result
+				+ (int) (sharedCofferId ^ sharedCofferId >>> 32);
+		result = prime * result + Arrays.hashCode(ticket);
+		return result;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(final long id) {
+		this.id = id;
 	}
 
 	/**

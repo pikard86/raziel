@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.softm.raziel.payload.Coffer;
-import com.softm.raziel.repo.CofferRepository;
 
 // TODO: Auto-generated Javadoc
 /**

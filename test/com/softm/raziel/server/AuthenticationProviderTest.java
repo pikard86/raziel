@@ -27,6 +27,7 @@ import com.softm.raziel.client.AuthenticationClient;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
+import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -60,10 +61,13 @@ public class AuthenticationProviderTest {
 	/**
 	 * Sign in test.
 	 *
-	 * @throws UndefinedOwnerException the undefined owner exception
+	 * @throws UndefinedOwnerException
+	 *             the undefined owner exception
+	 * @throws WrongOwnerCredentialException
 	 */
 	@Test
-	public void signInTest() throws UndefinedOwnerException {
+	public void signInTest() throws UndefinedOwnerException,
+			WrongOwnerCredentialException {
 		final Owner result = authProvider.signIn(OWNER_ID, PASSWORD);
 		Assert.assertNotNull(result);
 	}

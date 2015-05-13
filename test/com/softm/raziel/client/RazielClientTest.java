@@ -17,11 +17,14 @@
 package com.softm.raziel.client;
 
 import static org.mockito.ArgumentCaptor.forClass;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
@@ -40,9 +43,17 @@ import com.softm.raziel.payload.Message;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ClientTest.
+ * The Class AuthenticationClientTest.
  */
-public class ClientTest {
+public class RazielClientTest {
+
+	private static final String BOB_PASSWORD = "bobpassword";
+	private static final String BOB_ID = "bob id";
+	private static final String ALICE_PASSWORD = "password";
+	private static final String ALICE_ID = "ownerId";
+	private AuthenticationChannel authenticationChannel;
+	private ContentChannel contentChannel;
+	private RazielClient razielClient;
 
 	/**
 	 * Client sign in test.
@@ -60,16 +71,18 @@ public class ClientTest {
 	public void clientSignInTest() throws WrongOwnerCredentialException,
 			AuthenticationRequiredException, UndefinedOwnerException,
 			ContentException {
-		final AuthenticationChannel authenticationChannel = Mockito
-				.mock(AuthenticationChannel.class);
 
-		final ContentChannel contentChannel = Mockito
-				.mock(ContentChannel.class);
-		final ClientFactory clientFactory = new ClientFactory(
-				authenticationChannel, contentChannel);
-		final RazielClient client = clientFactory.getClient();
-		final String ownerId = "ownerId";
-		final String password = "password";
+		final String ownerId = ALICE_ID;
+		final String password = ALICE_PASSWORD;
+		fillAuthenticationMock(ownerId, password);
+
+		razielClient.signIn(ownerId, password);
+
+	}
+
+	public void fillAuthenticationMock(final String ownerId,
+			final String password) throws UndefinedOwnerException,
+			WrongOwnerCredentialException {
 		final AESCofferKey ownerKey = new AESCofferKey(password);
 		final Owner owner = OwnerFactory.createOwner(ownerId, ownerKey);
 		final Coffer<AuthenticationTreasure> coffer = owner
@@ -84,8 +97,35 @@ public class ClientTest {
 				.thenReturn(owner);
 		Mockito.when(authenticationChannel.getAuthenticationCoffer(ownerId))
 				.thenReturn(owner.getAuthenticationCoffer());
+	}
 
-		client.signIn(ownerId, password);
+	public void fillMockWithRecipients(final String ownerId,
+			final String password) throws UndefinedOwnerException {
+		final AESCofferKey boobKey = new AESCofferKey(ownerId);
+		final Owner owner = OwnerFactory.createOwner(ownerId, boobKey);
+		Mockito.when(authenticationChannel.getAuthenticationCoffer(ownerId))
+				.thenReturn(owner.getAuthenticationCoffer());
+		Mockito.when(
+				authenticationChannel.getOwnersByIds(Arrays.asList(ownerId)))
+				.thenReturn(Arrays.asList(owner));
+	}
+
+	@Before
+	public void setUp() {
+		authenticationChannel = mock(AuthenticationChannel.class);
+		contentChannel = Mockito.mock(ContentChannel.class);
+		final ClientFactory clientFactory = new ClientFactory(
+				authenticationChannel, contentChannel);
+		razielClient = clientFactory.getClient();
+	}
+
+	@Test
+	public void storeContentTest() throws AuthenticationRequiredException,
+	ContentException, WrongOwnerCredentialException,
+			UndefinedOwnerException {
+
+		fillAuthenticationMock(ALICE_ID, ALICE_PASSWORD);
+		razielClient.signIn(ALICE_ID, ALICE_PASSWORD);
 
 		final Message msg = new Message("Hello Bob", new Date());
 
@@ -93,19 +133,19 @@ public class ClientTest {
 		Mockito.when(contentChannel.storeCoffer(Mockito.any(Coffer.class)))
 				.thenReturn(mockContentID);
 
-		final long contentId = client.storeContent(msg);
+		final long contentId = razielClient.storeContent(msg);
 		final ArgumentCaptor<ContentTicket> ticketCaptor = forClass(ContentTicket.class);
 		verify(contentChannel).issueContentTicket(Mockito.anyString(),
 				ticketCaptor.capture());
-		when(contentChannel.getTicket(mockContentID, ownerId)).thenReturn(
+		when(contentChannel.getTicket(mockContentID, ALICE_ID)).thenReturn(
 				ticketCaptor.getValue());
 
 		final ArgumentCaptor<Coffer> cofferCaptor = forClass(Coffer.class);
 		verify(contentChannel).storeCoffer(cofferCaptor.capture());
 		when(contentChannel.getCoffer(mockContentID)).thenReturn(
 				cofferCaptor.getValue());
-		final Message retreivaedMsg = (Message) client.getContent(contentId);
+		final Message retreivaedMsg = (Message) razielClient
+				.getContent(contentId);
 		org.junit.Assert.assertEquals(msg, retreivaedMsg);
-
 	}
 }

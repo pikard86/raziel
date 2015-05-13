@@ -14,7 +14,7 @@
  *   You should have received a copy of the General Pizzurro License
  *   along with this program.  If not, see <http://www.pfsf.org/licenses/>.
  */
-package com.softm.raziel;
+package com.softm.raziel.client;
 
 import static org.mockito.ArgumentCaptor.forClass;
 import static org.mockito.Mockito.verify;
@@ -31,6 +31,8 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+import com.softm.raziel.Owner;
+import com.softm.raziel.OwnerFactory;
 import com.softm.raziel.client.AuthenticatedSession;
 import com.softm.raziel.client.ContentChannel;
 import com.softm.raziel.client.ContentCilent;
@@ -77,13 +79,11 @@ public class ContentServiceClientTest {
 		final List<String> recipientsIds = new ArrayList<String>();
 
 		recipientsIds.add(BOB_ID);
-		when(channel.getOwnersByIds(recipientsIds)).thenReturn(
-				Arrays.asList(bob));
 		when(channel.storeCoffer(Mockito.any(Coffer.class))).thenReturn(
 				(long) (Math.random() * 1000));
 
 		final Map<String, Long> shareContent = contentClient.shareContent(
-				messageToBob, alcieSession, recipientsIds);
+				messageToBob, alcieSession, Arrays.asList(bob));
 
 		final long bobContentId = shareContent.get(BOB_ID);
 
@@ -94,7 +94,7 @@ public class ContentServiceClientTest {
 		verify(channel).issueContentTicket(Mockito.eq(BOB_ID),
 				ticketCaptor.capture());
 		when(channel.getTicket(Mockito.eq(bobContentId), Mockito.eq(BOB_ID)))
-				.thenReturn(ticketCaptor.getValue());
+		.thenReturn(ticketCaptor.getValue());
 
 		final ArgumentCaptor<Coffer> cofferCaptor = forClass(Coffer.class);
 

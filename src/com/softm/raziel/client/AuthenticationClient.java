@@ -16,9 +16,12 @@
  */
 package com.softm.raziel.client;
 
+import java.util.List;
+
 import com.softm.raziel.Owner;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
+import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
@@ -58,6 +61,10 @@ public class AuthenticationClient {
 		this.channel = channel;
 	}
 
+	public List<Owner> getOwnersByIds(final List<String> recipientsIds) {
+		return channel.getOwnersByIds(recipientsIds);
+	}
+
 	/**
 	 * Sign in.
 	 *
@@ -68,9 +75,10 @@ public class AuthenticationClient {
 	 * @return true, if successful
 	 * @throws UndefinedOwnerException
 	 *             the undefined owner exception
+	 * @throws WrongOwnerCredentialException
 	 */
 	public Owner signIn(final String ownerId, final String password)
-			throws UndefinedOwnerException {
+			throws UndefinedOwnerException, WrongOwnerCredentialException {
 		final Coffer<AuthenticationTreasure> authCoffer = channel
 				.getAuthenticationCoffer(ownerId);
 		if (authCoffer == null) {

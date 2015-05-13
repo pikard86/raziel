@@ -36,6 +36,8 @@ public interface CofferRepository {
 	/**
 	 * Store.
 	 *
+	 * @param <T>
+	 *            the generic type
 	 * @param coffer
 	 *            the coffer
 	 * @return the long

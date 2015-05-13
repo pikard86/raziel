@@ -16,9 +16,123 @@
  */
 package com.softm.raziel.server;
 
+import java.io.Serializable;
+
+import com.softm.raziel.payload.Coffer;
+import com.softm.raziel.payload.ContentTicket;
+import com.softm.raziel.repo.CofferRepository;
+import com.softm.raziel.repo.TicketRepository;
+
+// TODO: Auto-generated Javadoc
 /**
  * The Class ContentService.
  */
 public class ContentService {
+
+	/** The coffer repository. */
+	private CofferRepository cofferRepository;
+
+	/** The ticket repository. */
+	private TicketRepository ticketRepository;
+
+	public ContentService(final CofferRepository cofferRepository,
+			final TicketRepository ticketRepository) {
+		super();
+		this.cofferRepository = cofferRepository;
+		this.ticketRepository = ticketRepository;
+	}
+
+	/**
+	 * Gets the coffer.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param cofferId
+	 *            the coffer id
+	 * @return the coffer
+	 */
+	public <T extends Serializable> Coffer<T> getCoffer(final long cofferId) {
+		return cofferRepository.findById(cofferId);
+	}
+
+	/**
+	 * Gets the coffer repository.
+	 *
+	 * @return the coffer repository
+	 */
+	public CofferRepository getCofferRepository() {
+		return cofferRepository;
+	}
+
+	/**
+	 * Gets the ticket.
+	 *
+	 * @param ownerId
+	 *            the owner id
+	 * @param cofferId
+	 *            the coffer id
+	 * @return the ticket
+	 */
+	public ContentTicket getTicket(final String ownerId, final long cofferId) {
+
+		return ticketRepository.findTicket(ownerId, cofferId);
+	}
+
+	/**
+	 * Gets the ticket repository.
+	 *
+	 * @return the ticket repository
+	 */
+	public TicketRepository getTicketRepository() {
+		return ticketRepository;
+	}
+
+	/**
+	 * Issue content ticket.
+	 *
+	 * @param ownerId
+	 *            the owner id
+	 * @param ticket
+	 *            the ticket
+	 * @return the long
+	 */
+	public long issueContentTicket(final String ownerId,
+			final ContentTicket ticket) {
+		// TODO: add check on content and owner ids
+		return ticketRepository.storeTicketForOwner(ownerId, ticket);
+	}
+
+	/**
+	 * Sets the coffer repository.
+	 *
+	 * @param cofferRepository
+	 *            the new coffer repository
+	 */
+	public void setCofferRepository(final CofferRepository cofferRepository) {
+		this.cofferRepository = cofferRepository;
+	}
+
+	/**
+	 * Sets the ticket repository.
+	 *
+	 * @param ticketRepository
+	 *            the new ticket repository
+	 */
+	public void setTicketRepository(final TicketRepository ticketRepository) {
+		this.ticketRepository = ticketRepository;
+	}
+
+	/**
+	 * Store coffer.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param coffer
+	 *            the coffer
+	 * @return the long
+	 */
+	public <T extends Serializable> long storeCoffer(final Coffer<T> coffer) {
+		return cofferRepository.store(coffer);
+	}
 
 }

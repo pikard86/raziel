@@ -16,7 +16,9 @@
  */
 package com.softm.raziel.client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.payload.AuthenticationTreasure;
@@ -33,7 +35,7 @@ public class AuthCannelMock implements AuthenticationChannel {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.softm.AuthenticationChannel#doSignIn(java.lang.String,
 	 * java.lang.String)
 	 */
@@ -49,7 +51,7 @@ public class AuthCannelMock implements AuthenticationChannel {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.softm.AuthenticationChannel#doSignOn(com.softm.secret.Owner)
 	 */
 	@Override
@@ -60,7 +62,7 @@ public class AuthCannelMock implements AuthenticationChannel {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.softm.AuthenticationChannel#getAuthenticationCoffer(java.lang.String)
 	 */
@@ -69,6 +71,19 @@ public class AuthCannelMock implements AuthenticationChannel {
 			final String ownerId) {
 		final Owner owner = owners.get(ownerId);
 		return owner.getAuthenticationCoffer();
+	}
+
+	@Override
+	public List<Owner> getOwnersByIds(final List<String> recipientsIds) {
+		final List<Owner> ownersByIds = new ArrayList<Owner>();
+
+		for (final String id : recipientsIds) {
+			final Owner owner = owners.get(id);
+			if (owner != null) {
+				ownersByIds.add(owner);
+			}
+		}
+		return ownersByIds;
 	}
 
 }

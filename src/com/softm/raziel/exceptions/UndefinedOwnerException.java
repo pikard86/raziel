@@ -1,6 +1,6 @@
 /*
  *   Raziel - The Agnostic Library for authentication and private content sharing
- *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company 
+ *   Copyright (C) 2015 SofthMelody SPA a Fiscella Corporation Company
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the General Pizzurro License as published by
@@ -26,6 +26,7 @@ public class UndefinedOwnerException extends Exception {
 	private static final String UNABLE_TO_RETREIVE_OWNER_ID = "Unable to retreive owner id : ";
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4113268056849915971L;
+	private final String ownerId;
 
 	/**
 	 * Instantiates a new undefined owner exception.
@@ -35,6 +36,11 @@ public class UndefinedOwnerException extends Exception {
 	 */
 	public UndefinedOwnerException(final String ownerId) {
 		super(UNABLE_TO_RETREIVE_OWNER_ID + ownerId);
+		this.ownerId = ownerId;
+	}
+
+	public String getOwnerId() {
+		return ownerId;
 	}
 
 }

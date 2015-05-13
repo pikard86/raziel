@@ -17,6 +17,9 @@
 package com.softm.raziel.client;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
@@ -66,6 +69,8 @@ public class RazielClient {
 	/**
 	 * Gets the content.
 	 *
+	 * @param <T>
+	 *            the generic type
 	 * @param contentId
 	 *            the content id
 	 * @return the content
@@ -74,7 +79,7 @@ public class RazielClient {
 	 * @throws ContentException
 	 *             the content exception
 	 */
-	public Serializable getContent(final long contentId)
+	public <T extends Serializable> T getContent(final long contentId)
 			throws AuthenticationRequiredException, ContentException {
 		checkSession();
 		return contentCilent.getContent(contentId, session);
@@ -127,6 +132,75 @@ public class RazielClient {
 	 */
 	public void setSession(final AuthenticatedSession session) {
 		this.session = session;
+	}
+
+	/**
+	 * Share content.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param content
+	 *            the content
+	 * @param recipientsIds
+	 *            the recipients ids
+	 * @return the map
+	 */
+	public <T extends Serializable> Map<String, Long> shareContent(
+			final T content, final List<String> recipientsIds) {
+		final List<Owner> owners = authenticationClient
+				.getOwnersByIds(recipientsIds);
+		return contentCilent.shareContent(content, session, owners);
+	}
+
+	/**
+	 * Share content.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param content
+	 *            the content
+	 * @param recipientId
+	 *            the recipient id
+	 * @return the map
+	 */
+	public <T extends Serializable> Map<String, Long> shareContent(
+			final T content, final String recipientId) {
+		return shareContent(content, Arrays.asList(recipientId));
+	}
+
+	/**
+	 * Share content.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @param recipientsIds
+	 *            the recipients ids
+	 * @return the map
+	 * @throws ContentException
+	 *             the content exception
+	 */
+	public Map<String, Long> shareExistingContent(final long contentId,
+			final List<String> recipientsIds) throws ContentException {
+		final List<Owner> owners = authenticationClient
+				.getOwnersByIds(recipientsIds);
+		return contentCilent.shareContent(contentId, session, owners);
+	}
+
+	/**
+	 * Share existing content.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @param recipientId
+	 *            the recipient id
+	 * @return the map
+	 * @throws ContentException
+	 *             the content exception
+	 */
+	public Map<String, Long> shareExistingContent(final long contentId,
+			final String recipientId) throws ContentException {
+
+		return shareExistingContent(contentId, Arrays.asList(recipientId));
 	}
 
 	/**
@@ -184,4 +258,5 @@ public class RazielClient {
 		checkSession();
 		return contentCilent.storeContent(content, session);
 	}
+
 }

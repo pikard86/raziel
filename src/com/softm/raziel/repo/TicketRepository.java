@@ -33,7 +33,7 @@ public interface TicketRepository {
 	 *            the coffer id
 	 * @return the content ticket
 	 */
-	ContentTicket findTiket(String ownerId, long cofferId);
+	ContentTicket findTicket(String ownerId, long cofferId);
 
 	/**
 	 * Store ticket for owner.

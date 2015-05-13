@@ -26,7 +26,7 @@ import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
 import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.repo.OwnerRepository;
-import com.softm.raziel.server.AutenticationService;
+import com.softm.raziel.server.AuthenticationService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -63,7 +63,7 @@ public class AuthenticationServiceTest {
 				.thenReturn(owner);
 
 		final String authenticationToken = owner.getAuthenticationToken();
-		final AutenticationService authServer = new AutenticationService(
+		final AuthenticationService authServer = new AuthenticationService(
 				ownerRepository);
 
 		authServer.onSignInRequest(ownerId, authenticationToken);
@@ -88,7 +88,7 @@ public class AuthenticationServiceTest {
 		final CofferKey ownerKey = new AESCofferKey(OWNER_PASSWORD.getBytes());
 		final Owner owner = OwnerFactory.createOwner(ownerId, ownerKey);
 
-		final AutenticationService authServer = new AutenticationService(
+		final AuthenticationService authServer = new AuthenticationService(
 				ownerRepository);
 
 		authServer.onSignOnRequest(owner);
