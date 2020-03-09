@@ -1,5 +1,7 @@
 # Welcome to Raziel Project 
 
+![Java CI with Maven](https://github.com/pikard86/raziel/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+
 A library for private content sharing.
 The main goal of this library is to provide a content sharing protocol implementation that preserves privacy.
 The library use client-side cryptography and allows to store on remote server private contents.
