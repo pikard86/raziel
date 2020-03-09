@@ -73,14 +73,9 @@ public class Message implements Serializable {
 			return false;
 		}
 		if (timestamp == null) {
-			if (other.timestamp != null) {
-				return false;
-			}
-		} else if (!timestamp.equals(other.timestamp)) {
-			return false;
-		}
-		return true;
-	}
+            return other.timestamp == null;
+		} else return timestamp.equals(other.timestamp);
+    }
 
 	/**
 	 * Gets the message text.

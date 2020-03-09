@@ -141,9 +141,9 @@ public class Coffer<T extends Serializable> {
 	public void lock(final CofferKey key) {
 		setEncryptedBytes(key.lockCoffer(this.getTreasureBytes()));
 		setTreasure(null);
-	};
+	}
 
-	/**
+    /**
 	 * Open.
 	 *
 	 * @param key

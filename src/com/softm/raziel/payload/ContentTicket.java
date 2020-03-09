@@ -60,11 +60,8 @@ public class ContentTicket implements Serializable {
 		if (sharedCofferId != other.sharedCofferId) {
 			return false;
 		}
-		if (!Arrays.equals(ticket, other.ticket)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(ticket, other.ticket);
+    }
 
 	/**
 	 * Gets the id.

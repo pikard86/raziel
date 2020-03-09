@@ -31,7 +31,7 @@ public interface CofferRepository {
 	 *            the id
 	 * @return the coffer
 	 */
-	public Coffer findById(long id);
+	Coffer findById(long id);
 
 	/**
 	 * Store.
@@ -42,6 +42,6 @@ public interface CofferRepository {
 	 *            the coffer
 	 * @return the long
 	 */
-	public long store(Coffer coffer);
+	long store(Coffer coffer);
 
 }

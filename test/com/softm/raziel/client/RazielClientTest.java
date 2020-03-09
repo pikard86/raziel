@@ -144,7 +144,7 @@ public class RazielClientTest {
 		verify(contentChannel).storeCoffer(cofferCaptor.capture());
 		when(contentChannel.getCoffer(mockContentID)).thenReturn(
 				cofferCaptor.getValue());
-		final Message retreivaedMsg = (Message) razielClient
+		final Message retreivaedMsg = razielClient
 				.getContent(contentId);
 		org.junit.Assert.assertEquals(msg, retreivaedMsg);
 	}

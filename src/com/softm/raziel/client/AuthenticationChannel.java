@@ -41,7 +41,7 @@ public interface AuthenticationChannel {
 	 * @throws WrongOwnerCredentialException
 	 * @throws UndefinedOwnerException
 	 */
-	public Owner doSignIn(String ownerId, String authenticationToken)
+    Owner doSignIn(String ownerId, String authenticationToken)
 			throws UndefinedOwnerException, WrongOwnerCredentialException;
 
 	/**
@@ -51,7 +51,7 @@ public interface AuthenticationChannel {
 	 *            the owner
 	 * @return true, if successful
 	 */
-	public boolean doSignOn(Owner owner);
+    boolean doSignOn(Owner owner);
 
 	/**
 	 * Gets the authentication coffer.
@@ -61,7 +61,7 @@ public interface AuthenticationChannel {
 	 * @return the authentication coffer
 	 * @throws UndefinedOwnerException
 	 */
-	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(String ownerId)
+    Coffer<AuthenticationTreasure> getAuthenticationCoffer(String ownerId)
 			throws UndefinedOwnerException;
 
 	/**
