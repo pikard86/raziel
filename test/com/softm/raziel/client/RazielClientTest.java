@@ -48,7 +48,7 @@ import com.softm.raziel.payload.Message;
  */
 public class RazielClientTest {
 
-	private static final String BOB_PASSWORD = "bobpassword";
+	private static final String BOB_PASSWORD = "bob_password";
 	private static final String BOB_ID = "bob id";
 	private static final String ALICE_PASSWORD = "password";
 	private static final String ALICE_ID = "ownerId";

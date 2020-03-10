@@ -63,7 +63,7 @@ public class ContentServiceClientTest {
 		final byte[] key = PASSWORD.getBytes();
 		final CofferKey ownerKey = new AESCofferKey(key);
 		final Owner alice = OwnerFactory.createOwner(ALICE_ID, ownerKey);
-		final AuthenticatedSession alcieSession = new AuthenticatedSession(
+		final AuthenticatedSession aliceSession = new AuthenticatedSession(
 				alice, PASSWORD);
 
 		final ContentClient contentClient = new ContentClient(channel);
@@ -76,7 +76,7 @@ public class ContentServiceClientTest {
 				(long) (Math.random() * 1000));
 
 		final Map<String, Long> shareContent = contentClient.shareContent(
-				messageToBob, alcieSession, Collections.singletonList(bob));
+				messageToBob, aliceSession, Collections.singletonList(bob));
 
 		final long bobContentId = shareContent.get(BOB_ID);
 

@@ -10,7 +10,7 @@ import com.softm.raziel.server.ContentService;
 public class LocalContentChannel implements ContentChannel {
 
 	private final ContentService service = new ContentService(
-			new InMemoryCofferReopsitory(), new InMemoryTicketRepository());
+			new InMemoryCofferRepository(), new InMemoryTicketRepository());
 
 	@Override
 	public <T extends Serializable> Coffer<T> getCoffer(final long contentId) {
@@ -26,8 +26,8 @@ public class LocalContentChannel implements ContentChannel {
 
 	@Override
 	public long issueContentTicket(final String ownerId,
-			final ContentTicket tiketCoffer) {
-		return service.issueContentTicket(ownerId, tiketCoffer);
+			final ContentTicket ticketCoffer) {
+		return service.issueContentTicket(ownerId, ticketCoffer);
 	}
 
 	@Override

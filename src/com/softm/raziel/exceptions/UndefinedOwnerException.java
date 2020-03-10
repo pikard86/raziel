@@ -22,8 +22,8 @@ package com.softm.raziel.exceptions;
  */
 public class UndefinedOwnerException extends Exception {
 
-	/** The Constant UNABLE_TO_RETREIVE_OWNER_ID. */
-	private static final String UNABLE_TO_RETREIVE_OWNER_ID = "Unable to retreive owner id : ";
+	/** The Constant UNABLE_TO_RETRIEVE_OWNER_ID. */
+	private static final String UNABLE_TO_RETRIEVE_OWNER_ID = "Unable to retrieve owner id : ";
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4113268056849915971L;
 	private final String ownerId;
@@ -35,7 +35,7 @@ public class UndefinedOwnerException extends Exception {
 	 *            the owner id
 	 */
 	public UndefinedOwnerException(final String ownerId) {
-		super(UNABLE_TO_RETREIVE_OWNER_ID + ownerId);
+		super(UNABLE_TO_RETRIEVE_OWNER_ID + ownerId);
 		this.ownerId = ownerId;
 	}
 

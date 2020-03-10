@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class MissingOwnersException extends Exception {
 
-	/** The Constant UNABLE_TO_RETREIVE_OWNER_IDS. */
+	/** The Constant UNABLE_TO_RETRIEVE_OWNER_IDS. */
 	private static final String UNABLE_TO_RETRIEVE_OWNER_IDS = "Unable to retrieve owner ids : ";
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1773861364233350166L;

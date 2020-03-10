@@ -44,9 +44,9 @@ public class ContentServiceTest {
     private static final String MSG_TXT = "Hello Bob";
 
     /**
-     * The Constant ALICE_PSWD.
+     * The Constant ALICE PASSWORD.
      */
-    private static final String ALICE_PSWD = "ALICE_PSWD";
+    private static final String ALICE_PASSWORD = "ALICE_PASSWORD";
 
     private ContentService service;
 
@@ -92,7 +92,7 @@ public class ContentServiceTest {
         final Coffer<Message> coffer = new Coffer<Message>();
         final Date timestamp = new Date();
         coffer.setTreasure(new Message(MSG_TXT, timestamp));
-        coffer.lock(new AESCofferKey(ALICE_PSWD));
+        coffer.lock(new AESCofferKey(ALICE_PASSWORD));
         /*
          * Store coffer on the service
          */
@@ -106,7 +106,7 @@ public class ContentServiceTest {
          */
         final Coffer<Message> retCoffer = service.getCoffer(cofferId);
 
-        retCoffer.open(new AESCofferKey(ALICE_PSWD));
+        retCoffer.open(new AESCofferKey(ALICE_PASSWORD));
         final Message treasure = retCoffer.getTreasure();
         Assert.assertEquals(MSG_TXT, treasure.getMessageText());
         Assert.assertEquals(timestamp, treasure.getTimestamp());

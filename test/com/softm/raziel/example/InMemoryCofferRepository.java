@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.repo.CofferRepository;
 
-public class InMemoryCofferReopsitory implements CofferRepository {
+public class InMemoryCofferRepository implements CofferRepository {
 	private final HashMap<Long, Coffer> coffers = new HashMap<Long, Coffer>();
 	private Long cofferSequence = Long.valueOf(1);
 

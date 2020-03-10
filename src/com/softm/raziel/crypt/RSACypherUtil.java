@@ -41,10 +41,10 @@ import com.softm.raziel.payload.ContentTicket;
 public class RSACypherUtil {
 
 	/**
-	 * Decript rsa.
+	 * Decrypt rsa.
 	 *
-	 * @param encriptedData
-	 *            the encripted data
+	 * @param encryptedData
+	 *            the encrypted data
 	 * @param privateKeyBytes
 	 *            the private key bytes
 	 * @return the byte[]
@@ -61,8 +61,8 @@ public class RSACypherUtil {
 	 * @throws InvalidKeyException
 	 *             the invalid key exception
 	 */
-	public static byte[] decriptRSA(final byte[] encriptedData,
-			final byte[] privateKeyBytes) throws NoSuchAlgorithmException,
+	public static byte[] decryptRSA(final byte[] encryptedData,
+									final byte[] privateKeyBytes) throws NoSuchAlgorithmException,
 			InvalidKeySpecException, NoSuchPaddingException,
 			IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
@@ -71,7 +71,7 @@ public class RSACypherUtil {
 		final PrivateKey privateKey = kf.generatePrivate(ks);
 		final Cipher c = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
 		c.init(Cipher.DECRYPT_MODE, privateKey);
-		final byte[] decrypted_bytes = c.doFinal(encriptedData);
+		final byte[] decrypted_bytes = c.doFinal(encryptedData);
 		return decrypted_bytes;
 
 	}
@@ -106,8 +106,7 @@ public class RSACypherUtil {
 		final PublicKey publicKey = kf.generatePublic(ks);
 		final Cipher cipher = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
 		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-		final byte[] enctipted_bytes = cipher.doFinal(data);
-		return enctipted_bytes;
+		return cipher.doFinal(data);
 	}
 
 	/**
@@ -123,8 +122,7 @@ public class RSACypherUtil {
 			final byte[] publicKeyBytes) {
 		try {
 			final byte[] secretKey = contentKey.getSecretKey();
-			final byte[] enctipted_bytes = encryptRSA(secretKey, publicKeyBytes);
-			return enctipted_bytes;
+			return encryptRSA(secretKey, publicKeyBytes);
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -169,10 +167,10 @@ public class RSACypherUtil {
 	 */
 	public static AESCofferKey getKeyFromTicket(final ContentTicket ticket,
 			final byte[] privateKeyBytes) {
-		final byte[] encriptedKeyData = ticket.getTicket();
+		final byte[] encryptedKeyData = ticket.getTicket();
 		byte[] secretKey;
 		try {
-			secretKey = decriptRSA(encriptedKeyData, privateKeyBytes);
+			secretKey = decryptRSA(encryptedKeyData, privateKeyBytes);
 			final AESCofferKey cofferKey = new AESCofferKey(secretKey);
 			return cofferKey;
 		} catch (final Exception e) {

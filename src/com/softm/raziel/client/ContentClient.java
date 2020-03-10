@@ -39,7 +39,7 @@ public class ContentClient {
 	private final ContentChannel contentChannel;
 
 	/**
-	 * Instantiates a new content cilent.
+	 * Instantiates a new content client.
 	 *
 	 * @param contentChannel
 	 *            the content channel
@@ -69,7 +69,7 @@ public class ContentClient {
 				owner.getId());
 		if (ticket == null) {
 			throw new ContentException(
-					"Unable to retreive ticket for content id :" + contentId);
+					"Unable to retrieve ticket for content id :" + contentId);
 		}
 		final Coffer<T> contentCoffer = contentChannel.getCoffer(contentId);
 		if (contentCoffer == null) {
@@ -89,8 +89,8 @@ public class ContentClient {
 	 *
 	 * @param sharedCofferId
 	 *            the shared coffer id
-	 * @param recypientId
-	 *            the recypient id
+	 * @param recipientId
+	 *            the recipient id
 	 * @param recipientPublicKey
 	 *            the recipient public key
 	 * @param contentKey
@@ -98,13 +98,13 @@ public class ContentClient {
 	 * @return the long
 	 */
 	public long issueContentTicket(final long sharedCofferId,
-			final String recypientId, final byte[] recipientPublicKey,
+			final String recipientId, final byte[] recipientPublicKey,
 			final AESCofferKey contentKey) {
-		final ContentTicket tiket = new ContentTicket();
-		tiket.setSharedCofferId(sharedCofferId);
-		tiket.setTicket(RSACypherUtil.generateTicket(contentKey,
+		final ContentTicket ticket = new ContentTicket();
+		ticket.setSharedCofferId(sharedCofferId);
+		ticket.setTicket(RSACypherUtil.generateTicket(contentKey,
 				recipientPublicKey));
-		return contentChannel.issueContentTicket(recypientId, tiket);
+		return contentChannel.issueContentTicket(recipientId, ticket);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class ContentClient {
 
 		final long sharedCofferId = contentChannel.storeCoffer(contentCoffer);
 
-		final long tiketId = issueContentTicket(sharedCofferId, ownerId,
+		final long ticketId = issueContentTicket(sharedCofferId, ownerId,
 				publicKey, contentKey);
 		return sharedCofferId;
 	}
