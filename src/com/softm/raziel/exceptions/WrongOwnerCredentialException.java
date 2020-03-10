@@ -17,7 +17,6 @@
  */
 package com.softm.raziel.exceptions;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class WrongOwnerCredentialException.

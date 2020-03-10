@@ -24,7 +24,6 @@ import com.softm.raziel.repo.TicketRepository;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class ContentService.

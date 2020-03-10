@@ -22,7 +22,6 @@ import com.softm.raziel.payload.ContentTicket;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Interface ContentChannel.

@@ -19,7 +19,6 @@ package com.softm.raziel.exceptions;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class MissingOwnersException.

@@ -26,7 +26,6 @@ import com.softm.raziel.repo.OwnerRepository;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class .

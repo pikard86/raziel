@@ -27,7 +27,6 @@ import com.softm.raziel.repo.OwnerRepository;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AuthenticationServerTest.

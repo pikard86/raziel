@@ -36,7 +36,6 @@ import static org.mockito.ArgumentCaptor.forClass;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class ContentServiceClientTest.

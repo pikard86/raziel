@@ -39,7 +39,6 @@ import java.util.Date;
 import static org.mockito.ArgumentCaptor.forClass;
 import static org.mockito.Mockito.*;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AuthenticationClientTest.

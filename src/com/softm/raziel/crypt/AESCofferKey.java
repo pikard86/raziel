@@ -28,7 +28,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AESCofferKey.

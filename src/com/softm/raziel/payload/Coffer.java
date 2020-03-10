@@ -21,7 +21,6 @@ import com.softm.raziel.crypt.CofferKey;
 
 import java.io.*;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class Coffer.

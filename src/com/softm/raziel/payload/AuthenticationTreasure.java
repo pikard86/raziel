@@ -21,7 +21,6 @@ import com.softm.raziel.crypt.AsymmetricKey;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AuthenticationTreasure.

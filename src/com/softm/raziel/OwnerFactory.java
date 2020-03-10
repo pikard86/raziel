@@ -25,7 +25,6 @@ import com.softm.raziel.payload.Coffer;
 
 import java.util.UUID;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * A factory for creating Owner objects.

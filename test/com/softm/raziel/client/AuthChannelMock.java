@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AuthChannelMock.

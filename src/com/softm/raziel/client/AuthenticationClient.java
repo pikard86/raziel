@@ -26,7 +26,6 @@ import com.softm.raziel.payload.Coffer;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AuthenticationProvider.

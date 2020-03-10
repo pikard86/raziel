@@ -17,7 +17,6 @@
  */
 package com.softm.raziel.client;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * A factory for creating Client objects.

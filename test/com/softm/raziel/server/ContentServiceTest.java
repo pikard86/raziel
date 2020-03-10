@@ -30,7 +30,6 @@ import org.mockito.Mockito;
 
 import java.util.Date;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class ContentServiceTest.

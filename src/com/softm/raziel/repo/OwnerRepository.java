@@ -21,7 +21,6 @@ import com.softm.raziel.Owner;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Interface OwnerRepository.

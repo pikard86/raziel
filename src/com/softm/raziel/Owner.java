@@ -20,7 +20,6 @@ package com.softm.raziel;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class Owner.

@@ -19,7 +19,6 @@ package com.softm.raziel.repo;
 
 import com.softm.raziel.payload.Coffer;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class CofferRepository.

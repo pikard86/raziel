@@ -19,7 +19,6 @@ package com.softm.raziel.repo;
 
 import com.softm.raziel.payload.ContentTicket;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Interface TicketRepository.

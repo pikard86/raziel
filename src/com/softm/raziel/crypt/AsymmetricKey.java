@@ -19,7 +19,6 @@ package com.softm.raziel.crypt;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AsymmetricKey.

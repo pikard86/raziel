@@ -20,7 +20,6 @@ package com.softm.raziel.payload;
 import java.io.Serializable;
 import java.util.Date;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class Message.

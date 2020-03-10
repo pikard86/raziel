@@ -24,7 +24,6 @@ import org.mockito.Mockito;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class CofferRepositoryTest.
