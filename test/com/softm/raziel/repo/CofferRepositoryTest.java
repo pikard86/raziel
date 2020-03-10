@@ -31,6 +31,29 @@ import java.io.Serializable;
 public class CofferRepositoryTest {
 
     /**
+     * Store and retrieve test.
+     */
+    @Test
+    public void storeAndRetrieveTest() {
+
+        final CofferRepository cofferRepository = Mockito
+                .mock(CofferRepository.class);
+        final Coffer<TestTreasure> coffer = new Coffer<TestTreasure>();
+
+        final TestTreasure testTreasure = new TestTreasure();
+        coffer.setTreasure(testTreasure);
+        coffer.setId(5432163);
+        Mockito.when(cofferRepository.findById(Mockito.anyLong())).thenReturn(
+                coffer);
+
+        final long id = cofferRepository.store(coffer);
+        final Coffer<TestTreasure> loadedCoffer = cofferRepository
+                .findById(coffer.getId());
+        Assert.assertEquals(coffer.getId(), loadedCoffer.getId());
+        Assert.assertEquals(coffer.getId(), loadedCoffer.getId());
+    }
+
+    /**
      * The Class TestTreasure.
      */
     private static class TestTreasure implements Serializable {
@@ -63,29 +86,6 @@ public class CofferRepositoryTest {
             this.message = message;
         }
 
-    }
-
-    /**
-     * Store and retrieve test.
-     */
-    @Test
-    public void storeAndRetrieveTest() {
-
-        final CofferRepository cofferRepository = Mockito
-                .mock(CofferRepository.class);
-        final Coffer<TestTreasure> coffer = new Coffer<TestTreasure>();
-
-        final TestTreasure testTreasure = new TestTreasure();
-        coffer.setTreasure(testTreasure);
-        coffer.setId(5432163);
-        Mockito.when(cofferRepository.findById(Mockito.anyLong())).thenReturn(
-                coffer);
-
-        final long id = cofferRepository.store(coffer);
-        final Coffer<TestTreasure> loadedCoffer = cofferRepository
-                .findById(coffer.getId());
-        Assert.assertEquals(coffer.getId(), loadedCoffer.getId());
-        Assert.assertEquals(coffer.getId(), loadedCoffer.getId());
     }
 
 }

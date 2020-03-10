@@ -16,8 +16,6 @@
  */
 package com.softm.raziel.client;
 
-import java.util.List;
-
 import com.softm.raziel.Owner;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
@@ -25,94 +23,92 @@ import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class AuthenticationProvider.
  */
 public class AuthenticationClient {
 
-	/**
-	 * The Interface SignOnCallback.
-	 */
-	public interface SignOnCallback {
+    /**
+     * The channel.
+     */
+    private final AuthenticationChannel channel;
 
-		/**
-		 * On failure.
-		 */
-		void onFailure();
+    /**
+     * Instantiates a new authentication provider.
+     *
+     * @param channel the channel
+     */
+    public AuthenticationClient(final AuthenticationChannel channel) {
+        super();
+        this.channel = channel;
+    }
 
-		/**
-		 * On success.
-		 */
-		void onSuccess();
-	}
+    public List<Owner> getOwnersByIds(final List<String> recipientsIds) {
+        return channel.getOwnersByIds(recipientsIds);
+    }
 
-	/** The channel. */
-	private final AuthenticationChannel channel;
+    /**
+     * Sign in.
+     *
+     * @param ownerId  the owner id
+     * @param password the password
+     * @return true, if successful
+     * @throws UndefinedOwnerException       the undefined owner exception
+     * @throws WrongOwnerCredentialException
+     */
+    public Owner signIn(final String ownerId, final String password)
+            throws UndefinedOwnerException, WrongOwnerCredentialException {
+        final Coffer<AuthenticationTreasure> authCoffer = channel
+                .getAuthenticationCoffer(ownerId);
+        if (authCoffer == null) {
+            throw new UndefinedOwnerException(ownerId);
+        }
+        final AESCofferKey key = new AESCofferKey(password);
+        authCoffer.open(key);
+        final String authenticationToken = authCoffer.getTreasure()
+                .getAuthenticationToken();
+        return channel.doSignIn(ownerId, authenticationToken);
+    }
 
-	/**
-	 * Instantiates a new authentication provider.
-	 *
-	 * @param channel
-	 *            the channel
-	 */
-	public AuthenticationClient(final AuthenticationChannel channel) {
-		super();
-		this.channel = channel;
-	}
+    /**
+     * Sign on.
+     *
+     * @param owner the owner
+     * @return true, if successful
+     */
+    public boolean signOn(final Owner owner) {
+        // TODO move here the owner factory invocation
+        return channel.doSignOn(owner);
+    }
 
-	public List<Owner> getOwnersByIds(final List<String> recipientsIds) {
-		return channel.getOwnersByIds(recipientsIds);
-	}
+    /**
+     * Sign on.
+     *
+     * @param owner    the owner
+     * @param callBack the call back
+     */
+    public void signOn(final Owner owner, final SignOnCallback callBack) {
+        callBack.onSuccess();
+    }
 
-	/**
-	 * Sign in.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @param password
-	 *            the password
-	 * @return true, if successful
-	 * @throws UndefinedOwnerException
-	 *             the undefined owner exception
-	 * @throws WrongOwnerCredentialException
-	 */
-	public Owner signIn(final String ownerId, final String password)
-			throws UndefinedOwnerException, WrongOwnerCredentialException {
-		final Coffer<AuthenticationTreasure> authCoffer = channel
-				.getAuthenticationCoffer(ownerId);
-		if (authCoffer == null) {
-			throw new UndefinedOwnerException(ownerId);
-		}
-		final AESCofferKey key = new AESCofferKey(password);
-		authCoffer.open(key);
-		final String authenticationToken = authCoffer.getTreasure()
-				.getAuthenticationToken();
-		return channel.doSignIn(ownerId, authenticationToken);
-	}
+    /**
+     * The Interface SignOnCallback.
+     */
+    public interface SignOnCallback {
 
-	/**
-	 * Sign on.
-	 *
-	 * @param owner
-	 *            the owner
-	 * @return true, if successful
-	 */
-	public boolean signOn(final Owner owner) {
-		// TODO move here the owner factory invocation
-		return channel.doSignOn(owner);
-	}
+        /**
+         * On failure.
+         */
+        void onFailure();
 
-	/**
-	 * Sign on.
-	 *
-	 * @param owner
-	 *            the owner
-	 * @param callBack
-	 *            the call back
-	 */
-	public void signOn(final Owner owner, final SignOnCallback callBack) {
-		callBack.onSuccess();
-	}
+        /**
+         * On success.
+         */
+        void onSuccess();
+    }
 
 }

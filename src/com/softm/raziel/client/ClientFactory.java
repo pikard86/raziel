@@ -17,41 +17,44 @@
 package com.softm.raziel.client;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * A factory for creating Client objects.
  */
 public class ClientFactory {
 
-	/** The authentication channel. */
-	private final AuthenticationChannel authenticationChannel;
+    /**
+     * The authentication channel.
+     */
+    private final AuthenticationChannel authenticationChannel;
 
-	/** The content channel. */
-	private final ContentChannel contentChannel;
+    /**
+     * The content channel.
+     */
+    private final ContentChannel contentChannel;
 
-	/**
-	 * Instantiates a new client factory.
-	 *
-	 * @param authenticationChannel
-	 *            the authentication channel
-	 * @param contentChannel
-	 *            the content channel
-	 */
-	public ClientFactory(final AuthenticationChannel authenticationChannel,
-			final ContentChannel contentChannel) {
-		this.authenticationChannel = authenticationChannel;
-		this.contentChannel = contentChannel;
-	}
+    /**
+     * Instantiates a new client factory.
+     *
+     * @param authenticationChannel the authentication channel
+     * @param contentChannel        the content channel
+     */
+    public ClientFactory(final AuthenticationChannel authenticationChannel,
+                         final ContentChannel contentChannel) {
+        this.authenticationChannel = authenticationChannel;
+        this.contentChannel = contentChannel;
+    }
 
-	/**
-	 * Gets the client.
-	 *
-	 * @return the client
-	 */
-	public RazielClient getClient() {
-		final RazielClient razielClient = new RazielClient();
-		razielClient.setAuthenticationClient(new AuthenticationClient(
-				authenticationChannel));
-		razielClient.setContentClient(new ContentClient(contentChannel));
-		return razielClient;
-	}
+    /**
+     * Gets the client.
+     *
+     * @return the client
+     */
+    public RazielClient getClient() {
+        final RazielClient razielClient = new RazielClient();
+        razielClient.setAuthenticationClient(new AuthenticationClient(
+                authenticationChannel));
+        razielClient.setContentClient(new ContentClient(contentChannel));
+        return razielClient;
+    }
 }

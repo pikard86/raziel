@@ -16,60 +16,56 @@
  */
 package com.softm.raziel.client;
 
-import java.util.List;
-
 import com.softm.raziel.Owner;
 import com.softm.raziel.exceptions.UndefinedOwnerException;
 import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
+
 /**
  * The Interface AuthenticationChannel.
  */
 public interface AuthenticationChannel {
 
-	/**
-	 * Do sign in.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @param authenticationToken
-	 *            the authentication token
-	 * @return true, if successful
-	 * @throws WrongOwnerCredentialException
-	 * @throws UndefinedOwnerException
-	 */
+    /**
+     * Do sign in.
+     *
+     * @param ownerId             the owner id
+     * @param authenticationToken the authentication token
+     * @return true, if successful
+     * @throws WrongOwnerCredentialException
+     * @throws UndefinedOwnerException
+     */
     Owner doSignIn(String ownerId, String authenticationToken)
-			throws UndefinedOwnerException, WrongOwnerCredentialException;
+            throws UndefinedOwnerException, WrongOwnerCredentialException;
 
-	/**
-	 * Do sign on.
-	 *
-	 * @param owner
-	 *            the owner
-	 * @return true, if successful
-	 */
+    /**
+     * Do sign on.
+     *
+     * @param owner the owner
+     * @return true, if successful
+     */
     boolean doSignOn(Owner owner);
 
-	/**
-	 * Gets the authentication coffer.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @return the authentication coffer
-	 * @throws UndefinedOwnerException
-	 */
+    /**
+     * Gets the authentication coffer.
+     *
+     * @param ownerId the owner id
+     * @return the authentication coffer
+     * @throws UndefinedOwnerException
+     */
     Coffer<AuthenticationTreasure> getAuthenticationCoffer(String ownerId)
-			throws UndefinedOwnerException;
+            throws UndefinedOwnerException;
 
-	/**
-	 * Gets the owners by ids.
-	 *
-	 * @param recipientsIds
-	 *            the recipients ids
-	 * @return the owners by ids
-	 */
-	List<Owner> getOwnersByIds(List<String> recipientsIds);
+    /**
+     * Gets the owners by ids.
+     *
+     * @param recipientsIds the recipients ids
+     * @return the owners by ids
+     */
+    List<Owner> getOwnersByIds(List<String> recipientsIds);
 }

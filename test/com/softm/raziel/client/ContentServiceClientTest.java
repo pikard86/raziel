@@ -16,17 +16,6 @@
  */
 package com.softm.raziel.client;
 
-import static org.mockito.ArgumentCaptor.forClass;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.*;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
 import com.softm.raziel.crypt.AESCofferKey;
@@ -35,86 +24,101 @@ import com.softm.raziel.exceptions.ContentException;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 import com.softm.raziel.payload.Message;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+
+import java.util.*;
+
+import static org.mockito.ArgumentCaptor.forClass;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class ContentServiceClientTest.
  */
 public class ContentServiceClientTest {
 
-	private static final String BOB_ID = "BOB";
+    private static final String BOB_ID = "BOB";
 
-	/** The Constant PASSWORD. */
-	private static final String PASSWORD = "password";
+    /**
+     * The Constant PASSWORD.
+     */
+    private static final String PASSWORD = "password";
 
-	/** The Constant OWNER_ID. */
-	private static final String ALICE_ID = "ALICE";
+    /**
+     * The Constant OWNER_ID.
+     */
+    private static final String ALICE_ID = "ALICE";
 
-	private static final String BOB_PASSWORD = "bob_password";
+    private static final String BOB_PASSWORD = "bob_password";
 
-	@Test
-	public void shareContent() throws ContentException {
-		final ContentChannel channel = Mockito.mock(ContentChannel.class);
+    @Test
+    public void shareContent() throws ContentException {
+        final ContentChannel channel = Mockito.mock(ContentChannel.class);
 
-		final Owner bob = OwnerFactory.createOwner(BOB_ID, new AESCofferKey(
-				BOB_PASSWORD));
+        final Owner bob = OwnerFactory.createOwner(BOB_ID, new AESCofferKey(
+                BOB_PASSWORD));
 
-		final byte[] key = PASSWORD.getBytes();
-		final CofferKey ownerKey = new AESCofferKey(key);
-		final Owner alice = OwnerFactory.createOwner(ALICE_ID, ownerKey);
-		final AuthenticatedSession aliceSession = new AuthenticatedSession(
-				alice, PASSWORD);
+        final byte[] key = PASSWORD.getBytes();
+        final CofferKey ownerKey = new AESCofferKey(key);
+        final Owner alice = OwnerFactory.createOwner(ALICE_ID, ownerKey);
+        final AuthenticatedSession aliceSession = new AuthenticatedSession(
+                alice, PASSWORD);
 
-		final ContentClient contentClient = new ContentClient(channel);
-		final Message messageToBob = new Message("Hello bob", new Date());
+        final ContentClient contentClient = new ContentClient(channel);
+        final Message messageToBob = new Message("Hello bob", new Date());
 
-		final List<String> recipientsIds = new ArrayList<String>();
+        final List<String> recipientsIds = new ArrayList<String>();
 
-		recipientsIds.add(BOB_ID);
-		when(channel.storeCoffer(Mockito.any(Coffer.class))).thenReturn(
-				(long) (Math.random() * 1000));
+        recipientsIds.add(BOB_ID);
+        when(channel.storeCoffer(Mockito.any(Coffer.class))).thenReturn(
+                (long) (Math.random() * 1000));
 
-		final Map<String, Long> shareContent = contentClient.shareContent(
-				messageToBob, aliceSession, Collections.singletonList(bob));
+        final Map<String, Long> shareContent = contentClient.shareContent(
+                messageToBob, aliceSession, Collections.singletonList(bob));
 
-		final long bobContentId = shareContent.get(BOB_ID);
+        final long bobContentId = shareContent.get(BOB_ID);
 
-		final AuthenticatedSession bobSession = new AuthenticatedSession(bob,
-				BOB_PASSWORD);
+        final AuthenticatedSession bobSession = new AuthenticatedSession(bob,
+                BOB_PASSWORD);
 
-		final ArgumentCaptor<ContentTicket> ticketCaptor = forClass(ContentTicket.class);
-		verify(channel).issueContentTicket(Mockito.eq(BOB_ID),
-				ticketCaptor.capture());
-		when(channel.getTicket(Mockito.eq(bobContentId), Mockito.eq(BOB_ID)))
-		.thenReturn(ticketCaptor.getValue());
+        final ArgumentCaptor<ContentTicket> ticketCaptor = forClass(ContentTicket.class);
+        verify(channel).issueContentTicket(Mockito.eq(BOB_ID),
+                ticketCaptor.capture());
+        when(channel.getTicket(Mockito.eq(bobContentId), Mockito.eq(BOB_ID)))
+                .thenReturn(ticketCaptor.getValue());
 
-		final ArgumentCaptor<Coffer> cofferCaptor = forClass(Coffer.class);
+        final ArgumentCaptor<Coffer> cofferCaptor = forClass(Coffer.class);
 
-		verify(channel, Mockito.atLeast(2)).storeCoffer(cofferCaptor.capture());
-		when(channel.getCoffer(Mockito.eq(bobContentId))).thenReturn(
-				cofferCaptor.getValue());
+        verify(channel, Mockito.atLeast(2)).storeCoffer(cofferCaptor.capture());
+        when(channel.getCoffer(Mockito.eq(bobContentId))).thenReturn(
+                cofferCaptor.getValue());
 
-		final Message messageFromAlice = contentClient.getContent(bobContentId,
-				bobSession);
-		Assert.assertEquals(messageToBob, messageFromAlice);
-	}
+        final Message messageFromAlice = contentClient.getContent(bobContentId,
+                bobSession);
+        Assert.assertEquals(messageToBob, messageFromAlice);
+    }
 
-	/**
-	 * Store content test.
-	 */
-	@Test
-	public void storeContentTest() {
-		final ContentChannel contentChannel = Mockito
-				.mock(ContentChannel.class);
-		final byte[] key = PASSWORD.getBytes();
-		final CofferKey ownerKey = new AESCofferKey(key);
-		final Owner owner = OwnerFactory.createOwner(ALICE_ID, ownerKey);
-		final AuthenticatedSession session = new AuthenticatedSession(owner,
-				PASSWORD);
+    /**
+     * Store content test.
+     */
+    @Test
+    public void storeContentTest() {
+        final ContentChannel contentChannel = Mockito
+                .mock(ContentChannel.class);
+        final byte[] key = PASSWORD.getBytes();
+        final CofferKey ownerKey = new AESCofferKey(key);
+        final Owner owner = OwnerFactory.createOwner(ALICE_ID, ownerKey);
+        final AuthenticatedSession session = new AuthenticatedSession(owner,
+                PASSWORD);
 
-		final ContentClient contentClient = new ContentClient(contentChannel);
-		final Message message = new Message("Hello bob", new Date());
+        final ContentClient contentClient = new ContentClient(contentChannel);
+        final Message message = new Message("Hello bob", new Date());
 
-		contentClient.storeContent(message, session);
-	}
+        contentClient.storeContent(message, session);
+    }
 }

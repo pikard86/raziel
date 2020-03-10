@@ -17,21 +17,24 @@
 package com.softm.raziel.exceptions;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class AuthenticationRequiredException.
  */
 public class AuthenticationRequiredException extends Exception {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 2197542970137131820L;
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 2197542970137131820L;
 
-	/**
-	 * Instantiates a new authentication required exception.
-	 *
-	 * @param msg the msg
-	 */
-	public AuthenticationRequiredException(final String msg) {
-		super(msg);
-	}
+    /**
+     * Instantiates a new authentication required exception.
+     *
+     * @param msg the msg
+     */
+    public AuthenticationRequiredException(final String msg) {
+        super(msg);
+    }
 
 }

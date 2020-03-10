@@ -19,30 +19,27 @@ package com.softm.raziel.repo;
 import com.softm.raziel.payload.ContentTicket;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Interface TicketRepository.
  */
 public interface TicketRepository {
 
-	/**
-	 * Find ticket.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @param cofferId
-	 *            the coffer id
-	 * @return the content ticket
-	 */
-	ContentTicket findTicket(String ownerId, long cofferId);
+    /**
+     * Find ticket.
+     *
+     * @param ownerId  the owner id
+     * @param cofferId the coffer id
+     * @return the content ticket
+     */
+    ContentTicket findTicket(String ownerId, long cofferId);
 
-	/**
-	 * Store ticket for owner.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @param ticket
-	 *            the ticket
-	 * @return the long
-	 */
-	long storeTicketForOwner(String ownerId, ContentTicket ticket);
+    /**
+     * Store ticket for owner.
+     *
+     * @param ownerId the owner id
+     * @param ticket  the ticket
+     * @return the long
+     */
+    long storeTicketForOwner(String ownerId, ContentTicket ticket);
 }

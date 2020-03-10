@@ -19,27 +19,26 @@ package com.softm.raziel.repo;
 import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class CofferRepository.
  */
 public interface CofferRepository {
 
-	/**
-	 * Find by id.
-	 *
-	 * @param id
-	 *            the id
-	 * @return the coffer
-	 */
-	Coffer findById(long id);
+    /**
+     * Find by id.
+     *
+     * @param id the id
+     * @return the coffer
+     */
+    Coffer findById(long id);
 
-	/**
-	 * Store.
-	 *
-	 * @param coffer
-	 *            the coffer
-	 * @return the long
-	 */
-	long store(Coffer coffer);
+    /**
+     * Store.
+     *
+     * @param coffer the coffer
+     * @return the long
+     */
+    long store(Coffer coffer);
 
 }

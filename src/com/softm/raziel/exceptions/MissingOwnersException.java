@@ -19,24 +19,28 @@ package com.softm.raziel.exceptions;
 import java.util.List;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class MissingOwnersException.
  */
 public class MissingOwnersException extends Exception {
 
-	/** The Constant UNABLE_TO_RETRIEVE_OWNER_IDS. */
-	private static final String UNABLE_TO_RETRIEVE_OWNER_IDS = "Unable to retrieve owner ids : ";
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1773861364233350166L;
+    /**
+     * The Constant UNABLE_TO_RETRIEVE_OWNER_IDS.
+     */
+    private static final String UNABLE_TO_RETRIEVE_OWNER_IDS = "Unable to retrieve owner ids : ";
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 1773861364233350166L;
 
-	/**
-	 * Instantiates a new missing owners exception.
-	 *
-	 * @param recipientsIds
-	 *            the recipients ids
-	 */
-	public MissingOwnersException(final List<String> recipientsIds) {
-		super(UNABLE_TO_RETRIEVE_OWNER_IDS + recipientsIds.toString());
-	}
+    /**
+     * Instantiates a new missing owners exception.
+     *
+     * @param recipientsIds the recipients ids
+     */
+    public MissingOwnersException(final List<String> recipientsIds) {
+        super(UNABLE_TO_RETRIEVE_OWNER_IDS + recipientsIds.toString());
+    }
 
 }

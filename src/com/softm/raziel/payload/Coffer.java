@@ -16,176 +16,169 @@
  */
 package com.softm.raziel.payload;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 import com.softm.raziel.crypt.CofferKey;
 
+import java.io.*;
+
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class Coffer.
  *
- * @param <T>
- *            the generic type
+ * @param <T> the generic type
  */
 public class Coffer<T extends Serializable> {
 
-	/** The id. */
-	private long id;
-
-	/** The encrypted bytes. */
-	private byte[] encryptedBytes;
-
-	/** The treasure. */
-	private T treasure;
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -7396530147151236165L;
-
-	/**
-	 * Gets the encrypted bytes.
-	 *
-	 * @return the encrypted bytes
-	 */
-	public byte[] getEncryptedBytes() {
-		return encryptedBytes;
-	}
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * Gets the treasure.
-	 *
-	 * @return the treasure
-	 */
-	public T getTreasure() {
-		return treasure;
-	}
-
-	/**
-	 * Gets the bytes.
-	 *
-	 * @return the bytes
-	 */
-	private byte[] getTreasureBytes() {
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ObjectOutputStream objectStream = null;
-		byte[] treasureBytes = null;
-		try {
-			objectStream = new ObjectOutputStream(out);
-			objectStream.writeObject(treasure);
-			treasureBytes = out.toByteArray();
-
-		} catch (final IOException e) {
-			throw new RuntimeException(e);
-			// TODO bubble the exception
-		} finally {
-			try {
-				if (objectStream != null) {
-					objectStream.close();
-				}
-				out.close();
-			} catch (final IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return treasureBytes;
-	}
-
-	/**
-	 * Inflate treasure.
-	 *
-	 * @param treasureBytes
-	 *            the treasure bytes
-	 * @return the t
-	 */
-	private T inflateTreasure(final byte[] treasureBytes) {
-		final InputStream inputStream = new ByteArrayInputStream(treasureBytes);
-		try {
-			final ObjectInputStream objectInputStream = new ObjectInputStream(
-					inputStream);
-			try {
-				final Object obj = objectInputStream.readObject();
-				return (T) obj;
-			} catch (final ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// TODO: throw a custom exception
-		return null;
-	}
-
-	/**
-	 * Lock.
-	 *
-	 * @param key
-	 *            the key
-	 */
-	public void lock(final CofferKey key) {
-		setEncryptedBytes(key.lockCoffer(this.getTreasureBytes()));
-		setTreasure(null);
-	}
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = -7396530147151236165L;
+    /**
+     * The id.
+     */
+    private long id;
+    /**
+     * The encrypted bytes.
+     */
+    private byte[] encryptedBytes;
+    /**
+     * The treasure.
+     */
+    private T treasure;
 
     /**
-	 * Open.
-	 *
-	 * @param key
-	 *            the key
-	 */
-	public void open(final CofferKey key) {
-		if (this.getEncryptedBytes() != null) {
-			final byte[] decryptedBytes = key.openCoffer(this
-					.getEncryptedBytes());
-			final T inflatedTreasure = inflateTreasure(decryptedBytes);
-			setTreasure(inflatedTreasure);
-			setEncryptedBytes(null);
-		}
-	}
+     * Gets the encrypted bytes.
+     *
+     * @return the encrypted bytes
+     */
+    public byte[] getEncryptedBytes() {
+        return encryptedBytes;
+    }
 
-	/**
-	 * Sets the encrypted bytes.
-	 *
-	 * @param encryptedBytes
-	 *            the new encrypted bytes
-	 */
-	public void setEncryptedBytes(final byte[] encryptedBytes) {
-		this.encryptedBytes = encryptedBytes;
-	}
+    /**
+     * Sets the encrypted bytes.
+     *
+     * @param encryptedBytes the new encrypted bytes
+     */
+    public void setEncryptedBytes(final byte[] encryptedBytes) {
+        this.encryptedBytes = encryptedBytes;
+    }
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id
-	 *            the new id
-	 */
-	public void setId(final long id) {
-		this.id = id;
-	}
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	/**
-	 * Sets the treasure.
-	 *
-	 * @param treasure
-	 *            the new treasure
-	 */
-	public void setTreasure(final T treasure) {
-		this.treasure = treasure;
-	}
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(final long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the treasure.
+     *
+     * @return the treasure
+     */
+    public T getTreasure() {
+        return treasure;
+    }
+
+    /**
+     * Sets the treasure.
+     *
+     * @param treasure the new treasure
+     */
+    public void setTreasure(final T treasure) {
+        this.treasure = treasure;
+    }
+
+    /**
+     * Gets the bytes.
+     *
+     * @return the bytes
+     */
+    private byte[] getTreasureBytes() {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream objectStream = null;
+        byte[] treasureBytes = null;
+        try {
+            objectStream = new ObjectOutputStream(out);
+            objectStream.writeObject(treasure);
+            treasureBytes = out.toByteArray();
+
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+            // TODO bubble the exception
+        } finally {
+            try {
+                if (objectStream != null) {
+                    objectStream.close();
+                }
+                out.close();
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return treasureBytes;
+    }
+
+    /**
+     * Inflate treasure.
+     *
+     * @param treasureBytes the treasure bytes
+     * @return the t
+     */
+    private T inflateTreasure(final byte[] treasureBytes) {
+        final InputStream inputStream = new ByteArrayInputStream(treasureBytes);
+        try {
+            final ObjectInputStream objectInputStream = new ObjectInputStream(
+                    inputStream);
+            try {
+                final Object obj = objectInputStream.readObject();
+                return (T) obj;
+            } catch (final ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } catch (final IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // TODO: throw a custom exception
+        return null;
+    }
+
+    /**
+     * Lock.
+     *
+     * @param key the key
+     */
+    public void lock(final CofferKey key) {
+        setEncryptedBytes(key.lockCoffer(this.getTreasureBytes()));
+        setTreasure(null);
+    }
+
+    /**
+     * Open.
+     *
+     * @param key the key
+     */
+    public void open(final CofferKey key) {
+        if (this.getEncryptedBytes() != null) {
+            final byte[] decryptedBytes = key.openCoffer(this
+                    .getEncryptedBytes());
+            final T inflatedTreasure = inflateTreasure(decryptedBytes);
+            setTreasure(inflatedTreasure);
+            setEncryptedBytes(null);
+        }
+    }
 
 }

@@ -16,58 +16,51 @@
  */
 package com.softm.raziel.client;
 
-import java.io.Serializable;
-
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
+import java.io.Serializable;
+
 // TODO: Auto-generated Javadoc
+
 /**
  * The Interface ContentChannel.
  */
 public interface ContentChannel {
 
-	/**
-	 * Gets the coffer.
-	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param contentId
-	 *            the content id
-	 * @return the coffer
-	 */
-	<T extends Serializable> Coffer<T> getCoffer(long contentId);
+    /**
+     * Gets the coffer.
+     *
+     * @param <T>       the generic type
+     * @param contentId the content id
+     * @return the coffer
+     */
+    <T extends Serializable> Coffer<T> getCoffer(long contentId);
 
-	/**
-	 * Gets the ticket.
-	 *
-	 * @param contentId
-	 *            the content id
-	 * @param ownerId
-	 *            the id
-	 * @return the ticket
-	 */
-	ContentTicket getTicket(long contentId, String ownerId);
+    /**
+     * Gets the ticket.
+     *
+     * @param contentId the content id
+     * @param ownerId   the id
+     * @return the ticket
+     */
+    ContentTicket getTicket(long contentId, String ownerId);
 
-	/**
-	 * Store content ticket.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @param ticketCoffer
-	 *            the ticket coffer
-	 * @return the long
-	 */
-	long issueContentTicket(String ownerId, ContentTicket ticketCoffer);
+    /**
+     * Store content ticket.
+     *
+     * @param ownerId      the owner id
+     * @param ticketCoffer the ticket coffer
+     * @return the long
+     */
+    long issueContentTicket(String ownerId, ContentTicket ticketCoffer);
 
-	/**
-	 * Store.
-	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param contentCoffer
-	 *            the content coffer
-	 * @return the long
-	 */
-	<T extends Serializable> long storeCoffer(Coffer<T> contentCoffer);
+    /**
+     * Store.
+     *
+     * @param <T>           the generic type
+     * @param contentCoffer the content coffer
+     * @return the long
+     */
+    <T extends Serializable> long storeCoffer(Coffer<T> contentCoffer);
 }

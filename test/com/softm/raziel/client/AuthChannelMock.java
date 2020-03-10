@@ -16,74 +16,77 @@
  */
 package com.softm.raziel.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.softm.raziel.Owner;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class AuthChannelMock.
  */
 public class AuthChannelMock implements AuthenticationChannel {
 
-	/** The owners. */
-	public final HashMap<String, Owner> owners = new HashMap<String, Owner>();
+    /**
+     * The owners.
+     */
+    public final HashMap<String, Owner> owners = new HashMap<String, Owner>();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.softm.AuthenticationChannel#doSignIn(java.lang.String,
-	 * java.lang.String)
-	 */
-	@Override
-	public Owner doSignIn(final String ownerId, final String authenticationToken) {
-		final Owner owner = owners.get(ownerId);
-		if (owner != null
-				&& owner.getAuthenticationToken().equals(authenticationToken)) {
-			return owner;
-		}
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.softm.AuthenticationChannel#doSignIn(java.lang.String,
+     * java.lang.String)
+     */
+    @Override
+    public Owner doSignIn(final String ownerId, final String authenticationToken) {
+        final Owner owner = owners.get(ownerId);
+        if (owner != null
+                && owner.getAuthenticationToken().equals(authenticationToken)) {
+            return owner;
+        }
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.softm.AuthenticationChannel#doSignOn(com.softm.secret.Owner)
-	 */
-	@Override
-	public boolean doSignOn(final Owner owner) {
-		owners.put(owner.getId(), owner);
-		return true;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.softm.AuthenticationChannel#doSignOn(com.softm.secret.Owner)
+     */
+    @Override
+    public boolean doSignOn(final Owner owner) {
+        owners.put(owner.getId(), owner);
+        return true;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.softm.AuthenticationChannel#getAuthenticationCoffer(java.lang.String)
-	 */
-	@Override
-	public Coffer<AuthenticationTreasure> getAuthenticationCoffer(
-			final String ownerId) {
-		final Owner owner = owners.get(ownerId);
-		return owner.getAuthenticationCoffer();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.softm.AuthenticationChannel#getAuthenticationCoffer(java.lang.String)
+     */
+    @Override
+    public Coffer<AuthenticationTreasure> getAuthenticationCoffer(
+            final String ownerId) {
+        final Owner owner = owners.get(ownerId);
+        return owner.getAuthenticationCoffer();
+    }
 
-	@Override
-	public List<Owner> getOwnersByIds(final List<String> recipientsIds) {
-		final List<Owner> ownersByIds = new ArrayList<Owner>();
+    @Override
+    public List<Owner> getOwnersByIds(final List<String> recipientsIds) {
+        final List<Owner> ownersByIds = new ArrayList<Owner>();
 
-		for (final String id : recipientsIds) {
-			final Owner owner = owners.get(id);
-			if (owner != null) {
-				ownersByIds.add(owner);
-			}
-		}
-		return ownersByIds;
-	}
+        for (final String id : recipientsIds) {
+            final Owner owner = owners.get(id);
+            if (owner != null) {
+                ownersByIds.add(owner);
+            }
+        }
+        return ownersByIds;
+    }
 
 }

@@ -16,40 +16,38 @@
  */
 package com.softm.raziel.repo;
 
-import java.util.List;
-
 import com.softm.raziel.Owner;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
+
 /**
  * The Interface OwnerRepository.
  */
 public interface OwnerRepository {
 
-	/**
-	 * Find owner by id.
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @return the owner
-	 */
-	Owner findOwnerById(String ownerId);
+    /**
+     * Find owner by id.
+     *
+     * @param ownerId the owner id
+     * @return the owner
+     */
+    Owner findOwnerById(String ownerId);
 
-	/**
-	 * Find owners by ids.
-	 *
-	 * @param ownerIds
-	 *            the owner ids
-	 * @return the list
-	 */
-	List<Owner> findOwnersByIds(List<String> ownerIds);
+    /**
+     * Find owners by ids.
+     *
+     * @param ownerIds the owner ids
+     * @return the list
+     */
+    List<Owner> findOwnersByIds(List<String> ownerIds);
 
-	/**
-	 * Store.
-	 *
-	 * @param owner
-	 *            the owner
-	 */
-	void store(Owner owner);
+    /**
+     * Store.
+     *
+     * @param owner the owner
+     */
+    void store(Owner owner);
 
 }

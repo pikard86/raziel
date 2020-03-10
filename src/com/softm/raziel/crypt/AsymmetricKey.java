@@ -24,73 +24,75 @@ import java.io.Serializable;
  * The Class AsymmetricKey.
  */
 public class AsymmetricKey implements Serializable {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 5219937819748791210L;
 
-	/** The private key. */
-	private byte[] privateKey;
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 5219937819748791210L;
 
-	/** The public key. */
-	private byte[] publicKey;
+    /**
+     * The private key.
+     */
+    private byte[] privateKey;
 
-	/**
-	 * Instantiates a new RSA coffer key.
-	 */
-	public AsymmetricKey() {
-		super();
-	}
+    /**
+     * The public key.
+     */
+    private byte[] publicKey;
 
-	/**
-	 * Instantiates a new RSA coffer key.
-	 *
-	 * @param publicKey
-	 *            the public key
-	 * @param privateKey
-	 *            the private key
-	 */
-	public AsymmetricKey(final byte[] publicKey, final byte[] privateKey) {
-		this();
-		this.publicKey = publicKey;
-		this.privateKey = privateKey;
-	}
+    /**
+     * Instantiates a new RSA coffer key.
+     */
+    public AsymmetricKey() {
+        super();
+    }
 
-	/**
-	 * Gets the private key.
-	 *
-	 * @return the private key
-	 */
-	public byte[] getPrivateKey() {
-		return privateKey;
-	}
+    /**
+     * Instantiates a new RSA coffer key.
+     *
+     * @param publicKey  the public key
+     * @param privateKey the private key
+     */
+    public AsymmetricKey(final byte[] publicKey, final byte[] privateKey) {
+        this();
+        this.publicKey = publicKey;
+        this.privateKey = privateKey;
+    }
 
-	/**
-	 * Gets the public key.
-	 *
-	 * @return the public key
-	 */
-	public byte[] getPublicKey() {
-		return publicKey;
-	}
+    /**
+     * Gets the private key.
+     *
+     * @return the private key
+     */
+    public byte[] getPrivateKey() {
+        return privateKey;
+    }
 
-	/**
-	 * Sets the private key.
-	 *
-	 * @param privateKey
-	 *            the new private key
-	 */
-	public void setPrivateKey(final byte[] privateKey) {
-		this.privateKey = privateKey;
-	}
+    /**
+     * Sets the private key.
+     *
+     * @param privateKey the new private key
+     */
+    public void setPrivateKey(final byte[] privateKey) {
+        this.privateKey = privateKey;
+    }
 
-	/**
-	 * Sets the public key.
-	 *
-	 * @param publicKey
-	 *            the new public key
-	 */
-	public void setPublicKey(final byte[] publicKey) {
-		this.publicKey = publicKey;
-	}
+    /**
+     * Gets the public key.
+     *
+     * @return the public key
+     */
+    public byte[] getPublicKey() {
+        return publicKey;
+    }
+
+    /**
+     * Sets the public key.
+     *
+     * @param publicKey the new public key
+     */
+    public void setPublicKey(final byte[] publicKey) {
+        this.publicKey = publicKey;
+    }
 
 }

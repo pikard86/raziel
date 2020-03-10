@@ -19,6 +19,7 @@ package com.softm.raziel.crypt;
 import java.io.Serializable;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class CofferKey.
  *
@@ -26,25 +27,25 @@ import java.io.Serializable;
  */
 public abstract class CofferKey implements Serializable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -4662067005874119024L;
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = -4662067005874119024L;
 
-	/**
-	 * Lock coffer.
-	 *
-	 * @param treasureBytes
-	 *            the treasure bytes
-	 * @return the byte[]
-	 */
-	public abstract byte[] lockCoffer(byte[] treasureBytes);
+    /**
+     * Lock coffer.
+     *
+     * @param treasureBytes the treasure bytes
+     * @return the byte[]
+     */
+    public abstract byte[] lockCoffer(byte[] treasureBytes);
 
-	/**
-	 * Open coffer.
-	 *
-	 * @param encryptedBytes
-	 *            the encrypted bytes
-	 * @return the byte[]
-	 */
-	public abstract byte[] openCoffer(byte[] encryptedBytes);
+    /**
+     * Open coffer.
+     *
+     * @param encryptedBytes the encrypted bytes
+     * @return the byte[]
+     */
+    public abstract byte[] openCoffer(byte[] encryptedBytes);
 
 }

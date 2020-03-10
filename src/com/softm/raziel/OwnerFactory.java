@@ -16,13 +16,13 @@
  */
 package com.softm.raziel;
 
-import java.util.UUID;
-
 import com.softm.raziel.crypt.AsymmetricKey;
 import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.crypt.RSACypherUtil;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
+
+import java.util.UUID;
 
 // TODO: Auto-generated Javadoc
 
@@ -31,61 +31,59 @@ import com.softm.raziel.payload.Coffer;
  */
 public class OwnerFactory {
 
-	/**
-	 * Creates the owner. with encrypted authentication treasures
-	 *
-	 * @param ownerId
-	 *            the owner id
-	 * @param ownerKey
-	 *            the owner key
-	 * @return the owner
-	 */
-	public static Owner createOwner(final String ownerId,
-			final CofferKey ownerKey) {
-		final Owner owner = new Owner();
+    /**
+     * Creates the owner. with encrypted authentication treasures
+     *
+     * @param ownerId  the owner id
+     * @param ownerKey the owner key
+     * @return the owner
+     */
+    public static Owner createOwner(final String ownerId,
+                                    final CofferKey ownerKey) {
+        final Owner owner = new Owner();
 
-		final Coffer authCoffer = new Coffer();
+        final Coffer authCoffer = new Coffer();
 
-		final AuthenticationTreasure authTreasure = new AuthenticationTreasure();
+        final AuthenticationTreasure authTreasure = new AuthenticationTreasure();
 
-		/*
-		 * Generates the authentication token the only secret information shared
-		 * with the server
-		 */
-		final String authenticationToken = getAuthenticationToken();
+        /*
+         * Generates the authentication token the only secret information shared
+         * with the server
+         */
+        final String authenticationToken = getAuthenticationToken();
 
-		authTreasure.setAuthenticationToken(authenticationToken);
+        authTreasure.setAuthenticationToken(authenticationToken);
 
-		/*
-		 * Obtains the asymmetric key
-		 */
-		final AsymmetricKey asymmetricKey = RSACypherUtil.getCofferKey();
-		/*
-		 * Put the key into the treasure
-		 */
-		authTreasure.setAsymmetricKey(asymmetricKey);
-		/*
-		 * Store the treasure into the coffer
-		 */
-		authCoffer.setTreasure(authTreasure);
-		/*
-		 * Lock the coffer with owner symmetric key
-		 */
-		authCoffer.lock(ownerKey);
-		owner.setId(ownerId);
-		owner.setPublicKey(asymmetricKey.getPublicKey());
-		owner.setAuthenticationCoffer(authCoffer);
-		owner.setAuthenticationToken(authenticationToken);
-		return owner;
-	}
+        /*
+         * Obtains the asymmetric key
+         */
+        final AsymmetricKey asymmetricKey = RSACypherUtil.getCofferKey();
+        /*
+         * Put the key into the treasure
+         */
+        authTreasure.setAsymmetricKey(asymmetricKey);
+        /*
+         * Store the treasure into the coffer
+         */
+        authCoffer.setTreasure(authTreasure);
+        /*
+         * Lock the coffer with owner symmetric key
+         */
+        authCoffer.lock(ownerKey);
+        owner.setId(ownerId);
+        owner.setPublicKey(asymmetricKey.getPublicKey());
+        owner.setAuthenticationCoffer(authCoffer);
+        owner.setAuthenticationToken(authenticationToken);
+        return owner;
+    }
 
-	/**
-	 * Gets the authentication token.
-	 *
-	 * @return the authentication token
-	 */
-	protected static String getAuthenticationToken() {
-		return UUID.randomUUID().toString();
-	}
+    /**
+     * Gets the authentication token.
+     *
+     * @return the authentication token
+     */
+    protected static String getAuthenticationToken() {
+        return UUID.randomUUID().toString();
+    }
 
 }

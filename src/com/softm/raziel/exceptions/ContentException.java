@@ -17,21 +17,23 @@
 package com.softm.raziel.exceptions;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * The Class ContentException.
  */
 public class ContentException extends Exception {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -3919980143120659981L;
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = -3919980143120659981L;
 
-	/**
-	 * Instantiates a new content exception.
-	 *
-	 * @param msg
-	 *            the msg
-	 */
-	public ContentException(final String msg) {
-		super(msg);
-	}
+    /**
+     * Instantiates a new content exception.
+     *
+     * @param msg the msg
+     */
+    public ContentException(final String msg) {
+        super(msg);
+    }
 }
