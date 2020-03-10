@@ -118,8 +118,7 @@ public class Coffer<T extends Serializable> {
 					inputStream);
 			try {
 				final Object obj = objectInputStream.readObject();
-				final T treasure = (T) obj;
-				return treasure;
+				return (T) obj;
 			} catch (final ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

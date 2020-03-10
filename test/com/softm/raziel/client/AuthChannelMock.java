@@ -31,7 +31,7 @@ import com.softm.raziel.payload.Coffer;
 public class AuthChannelMock implements AuthenticationChannel {
 
 	/** The owners. */
-	public HashMap<String, Owner> owners = new HashMap<String, Owner>();
+	public final HashMap<String, Owner> owners = new HashMap<String, Owner>();
 
 	/*
 	 * (non-Javadoc)

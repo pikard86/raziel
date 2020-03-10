@@ -29,8 +29,6 @@ import com.softm.raziel.client.ClientFactory;
 import com.softm.raziel.client.RazielClient;
 import com.softm.raziel.exceptions.AuthenticationRequiredException;
 import com.softm.raziel.exceptions.ContentException;
-import com.softm.raziel.exceptions.UndefinedOwnerException;
-import com.softm.raziel.exceptions.WrongOwnerCredentialException;
 import com.softm.raziel.payload.Message;
 
 /**
@@ -52,8 +50,8 @@ public class AppExampleTest {
 	private RazielClient trudy;
 
 	@Test
-	public void basicInteractionTest() throws WrongOwnerCredentialException,
-	UndefinedOwnerException, AuthenticationRequiredException,
+	public void basicInteractionTest() throws
+			AuthenticationRequiredException,
 	ContentException {
 		bob.signOn(BOB_ID, BOB_PASSWORD);
 
@@ -74,7 +72,7 @@ public class AppExampleTest {
 			final Message stolenMessage = trudy.getContent(sharedContents
 					.get(ALICE_ID));
 			Assert.assertNotEquals(messageToAlice, stolenMessage);
-		} catch (final RuntimeException e) {
+		} catch (final RuntimeException ignored) {
 		}
 
 		final Map<String, Long> contentSharedWithTrudy = alice

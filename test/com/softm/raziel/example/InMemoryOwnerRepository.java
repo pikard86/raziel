@@ -9,7 +9,7 @@ import com.softm.raziel.repo.OwnerRepository;
 
 public class InMemoryOwnerRepository implements OwnerRepository {
 
-	HashMap<String, Owner> memory = new HashMap<String, Owner>();
+	final HashMap<String, Owner> memory = new HashMap<String, Owner>();
 
 	@Override
 	public Owner findOwnerById(final String ownerId) {

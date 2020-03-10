@@ -32,7 +32,6 @@ import com.softm.raziel.OwnerFactory;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.exceptions.ContentException;
-import com.softm.raziel.exceptions.MissingOwnersException;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 import com.softm.raziel.payload.Message;
@@ -54,7 +53,7 @@ public class ContentServiceClientTest {
 	private static final String BOB_PASSWORD = "bob_password";
 
 	@Test
-	public void shareContent() throws MissingOwnersException, ContentException {
+	public void shareContent() throws ContentException {
 		final ContentChannel channel = Mockito.mock(ContentChannel.class);
 
 		final Owner bob = OwnerFactory.createOwner(BOB_ID, new AESCofferKey(

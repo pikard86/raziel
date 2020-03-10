@@ -12,7 +12,7 @@ import com.softm.raziel.server.AuthenticationService;
 
 public class LocalAuthenticationChannel implements AuthenticationChannel {
 
-	AuthenticationService service = new AuthenticationService(
+	final AuthenticationService service = new AuthenticationService(
 			new InMemoryOwnerRepository());
 
 	@Override

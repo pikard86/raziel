@@ -72,21 +72,15 @@ public class AuthenticationServiceTest {
 	/**
 	 * Test sign on.
 	 *
-	 * @throws UndefinedOwnerException
-	 *             the undefined owner exception
-	 * @throws WrongOwnerCredentialException
-	 *             the wrong owner credential exception
 	 */
 	@Test
-	public void testSignOn() throws UndefinedOwnerException,
-			WrongOwnerCredentialException {
-		final String ownerId = OWNER_ID;
+	public void testSignOn() {
 
 		final OwnerRepository ownerRepository = Mockito
 				.mock(OwnerRepository.class);
 
 		final CofferKey ownerKey = new AESCofferKey(OWNER_PASSWORD.getBytes());
-		final Owner owner = OwnerFactory.createOwner(ownerId, ownerKey);
+		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);
 
 		final AuthenticationService authServer = new AuthenticationService(
 				ownerRepository);

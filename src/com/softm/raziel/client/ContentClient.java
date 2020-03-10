@@ -188,9 +188,8 @@ public class ContentClient {
 		final String ownerId = owner.getId();
 		final byte[] publicKey = owner.getPublicKey();
 
-		final long sharedCofferId = storeContentForOwner(plainContent, ownerId,
+		return storeContentForOwner(plainContent, ownerId,
 				publicKey);
-		return sharedCofferId;
 	}
 
 	/**

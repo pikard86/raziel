@@ -21,7 +21,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
@@ -61,17 +60,12 @@ public class RazielClientTest {
 	 *
 	 * @throws WrongOwnerCredentialException
 	 *             the wrong owner credential exception
-	 * @throws AuthenticationRequiredException
-	 *             the authentication required exception
 	 * @throws UndefinedOwnerException
 	 *             the undefined owner exception
-	 * @throws ContentException
-	 *             the content exception
 	 */
 	@Test
 	public void clientSignInTest() throws WrongOwnerCredentialException,
-			AuthenticationRequiredException, UndefinedOwnerException,
-			ContentException {
+			UndefinedOwnerException {
 
 		final String ownerId = ALICE_ID;
 		final String password = ALICE_PASSWORD;

@@ -71,8 +71,7 @@ public class RSACypherUtil {
 		final PrivateKey privateKey = kf.generatePrivate(ks);
 		final Cipher c = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
 		c.init(Cipher.DECRYPT_MODE, privateKey);
-		final byte[] decrypted_bytes = c.doFinal(encryptedData);
-		return decrypted_bytes;
+		return c.doFinal(encryptedData);
 
 	}
 
@@ -144,10 +143,8 @@ public class RSACypherUtil {
 			// PKCS#8
 			final byte[] privateKey = kp.getPrivate().getEncoded();
 
-			final AsymmetricKey cofferKey = new AsymmetricKey(publicKey,
+			return new AsymmetricKey(publicKey,
 					privateKey);
-
-			return cofferKey;
 
 		} catch (final NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -171,8 +168,7 @@ public class RSACypherUtil {
 		byte[] secretKey;
 		try {
 			secretKey = decryptRSA(encryptedKeyData, privateKeyBytes);
-			final AESCofferKey cofferKey = new AESCofferKey(secretKey);
-			return cofferKey;
+			return new AESCofferKey(secretKey);
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
