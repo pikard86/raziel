@@ -18,6 +18,7 @@ package com.softm.raziel.client;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -165,7 +166,7 @@ public class RazielClient {
 	 */
 	public <T extends Serializable> Map<String, Long> shareContent(
 			final T content, final String recipientId) {
-		return shareContent(content, Arrays.asList(recipientId));
+		return shareContent(content, Collections.singletonList(recipientId));
 	}
 
 	/**
@@ -200,7 +201,7 @@ public class RazielClient {
 	public Map<String, Long> shareExistingContent(final long contentId,
 			final String recipientId) throws ContentException {
 
-		return shareExistingContent(contentId, Arrays.asList(recipientId));
+		return shareExistingContent(contentId, Collections.singletonList(recipientId));
 	}
 
 	/**

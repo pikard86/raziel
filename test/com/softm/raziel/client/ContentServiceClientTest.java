@@ -20,11 +20,7 @@ import static org.mockito.ArgumentCaptor.forClass;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -80,7 +76,7 @@ public class ContentServiceClientTest {
 				(long) (Math.random() * 1000));
 
 		final Map<String, Long> shareContent = contentClient.shareContent(
-				messageToBob, alcieSession, Arrays.asList(bob));
+				messageToBob, alcieSession, Collections.singletonList(bob));
 
 		final long bobContentId = shareContent.get(BOB_ID);
 

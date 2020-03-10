@@ -22,6 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 import org.junit.Before;
@@ -106,8 +107,8 @@ public class RazielClientTest {
 		Mockito.when(authenticationChannel.getAuthenticationCoffer(ownerId))
 				.thenReturn(owner.getAuthenticationCoffer());
 		Mockito.when(
-				authenticationChannel.getOwnersByIds(Arrays.asList(ownerId)))
-				.thenReturn(Arrays.asList(owner));
+				authenticationChannel.getOwnersByIds(Collections.singletonList(ownerId)))
+				.thenReturn(Collections.singletonList(owner));
 	}
 
 	@Before
