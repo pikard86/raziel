@@ -25,7 +25,7 @@ import com.softm.raziel.payload.ContentTicket;
 public interface TicketRepository {
 
 	/**
-	 * Find tiket.
+	 * Find ticket.
 	 *
 	 * @param ownerId
 	 *            the owner id

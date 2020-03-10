@@ -151,9 +151,9 @@ public class Coffer<T extends Serializable> {
 	 */
 	public void open(final CofferKey key) {
 		if (this.getEncryptedBytes() != null) {
-			final byte[] decriptedBytes = key.openCoffer(this
+			final byte[] decryptedBytes = key.openCoffer(this
 					.getEncryptedBytes());
-			final T inflatedTreasure = inflateTreasure(decriptedBytes);
+			final T inflatedTreasure = inflateTreasure(decryptedBytes);
 			setTreasure(inflatedTreasure);
 			setEncryptedBytes(null);
 		}

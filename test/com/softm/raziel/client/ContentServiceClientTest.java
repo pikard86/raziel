@@ -33,9 +33,6 @@ import org.mockito.Mockito;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
-import com.softm.raziel.client.AuthenticatedSession;
-import com.softm.raziel.client.ContentChannel;
-import com.softm.raziel.client.ContentCilent;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
 import com.softm.raziel.exceptions.ContentException;
@@ -73,7 +70,7 @@ public class ContentServiceClientTest {
 		final AuthenticatedSession alcieSession = new AuthenticatedSession(
 				alice, PASSWORD);
 
-		final ContentCilent contentClient = new ContentCilent(channel);
+		final ContentClient contentClient = new ContentClient(channel);
 		final Message messageToBob = new Message("Hello bob", new Date());
 
 		final List<String> recipientsIds = new ArrayList<String>();
@@ -120,7 +117,7 @@ public class ContentServiceClientTest {
 		final AuthenticatedSession session = new AuthenticatedSession(owner,
 				PASSWORD);
 
-		final ContentCilent contentClient = new ContentCilent(contentChannel);
+		final ContentClient contentClient = new ContentClient(contentChannel);
 		final Message message = new Message("Hello bob", new Date());
 
 		contentClient.storeContent(message, session);

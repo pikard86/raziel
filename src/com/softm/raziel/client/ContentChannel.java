@@ -54,11 +54,11 @@ public interface ContentChannel {
 	 *
 	 * @param ownerId
 	 *            the owner id
-	 * @param tiketCoffer
-	 *            the tiket coffer
+	 * @param ticketCoffer
+	 *            the ticket coffer
 	 * @return the long
 	 */
-	long issueContentTicket(String ownerId, ContentTicket tiketCoffer);
+	long issueContentTicket(String ownerId, ContentTicket ticketCoffer);
 
 	/**
 	 * Store.

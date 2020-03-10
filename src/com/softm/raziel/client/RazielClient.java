@@ -41,8 +41,8 @@ public class RazielClient {
 	/** The authentication client. */
 	private AuthenticationClient authenticationClient;
 
-	/** The content cilent. */
-	private ContentCilent contentCilent;
+	/** The content client. */
+	private ContentClient contentClient;
 
 	/**
 	 * Check session.
@@ -53,7 +53,7 @@ public class RazielClient {
 	private void checkSession() throws AuthenticationRequiredException {
 		if (session == null) {
 			throw new AuthenticationRequiredException(
-					"Unable to store content autentication required do SignIn/SignOn before");
+					"Unable to store content authentication required do SignIn/SignOn before");
 		}
 	}
 
@@ -82,16 +82,16 @@ public class RazielClient {
 	public <T extends Serializable> T getContent(final long contentId)
 			throws AuthenticationRequiredException, ContentException {
 		checkSession();
-		return contentCilent.getContent(contentId, session);
+		return contentClient.getContent(contentId, session);
 	}
 
 	/**
-	 * Gets the content cilent.
+	 * Gets the content client.
 	 *
-	 * @return the content cilent
+	 * @return the content client
 	 */
-	public ContentCilent getContentCilent() {
-		return contentCilent;
+	public ContentClient getContentClient() {
+		return contentClient;
 	}
 
 	/**
@@ -115,13 +115,13 @@ public class RazielClient {
 	}
 
 	/**
-	 * Sets the content cilent.
+	 * Sets the content client.
 	 *
-	 * @param contentCilent
-	 *            the new content cilent
+	 * @param contentClient
+	 *            the new content client
 	 */
-	public void setContentCilent(final ContentCilent contentCilent) {
-		this.contentCilent = contentCilent;
+	public void setContentClient(final ContentClient contentClient) {
+		this.contentClient = contentClient;
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class RazielClient {
 			final T content, final List<String> recipientsIds) {
 		final List<Owner> owners = authenticationClient
 				.getOwnersByIds(recipientsIds);
-		return contentCilent.shareContent(content, session, owners);
+		return contentClient.shareContent(content, session, owners);
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class RazielClient {
 			final List<String> recipientsIds) throws ContentException {
 		final List<Owner> owners = authenticationClient
 				.getOwnersByIds(recipientsIds);
-		return contentCilent.shareContent(contentId, session, owners);
+		return contentClient.shareContent(contentId, session, owners);
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class RazielClient {
 	public <T extends Serializable> long storeContent(final T content)
 			throws AuthenticationRequiredException {
 		checkSession();
-		return contentCilent.storeContent(content, session);
+		return contentClient.storeContent(content, session);
 	}
 
 }

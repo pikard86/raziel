@@ -46,8 +46,8 @@ public class AESCofferKey extends CofferKey {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3663336776189514516L;
 
-	/** The iterationscount. */
-	private final int ITERATIONSCOUNT = 1000;
+	/** The iterations count. */
+	private final int ITERATIONS_COUNT = 1000;
 
 	/** The salt. */
 	private byte[] salt;
@@ -115,7 +115,7 @@ public class AESCofferKey extends CofferKey {
 
 		final SecretKeyFactory factoryKeyEncrypt = SecretKeyFactory
 				.getInstance(PBKDF2_WITH_HMAC_SHA1);
-		final KeySpec keySpec = new PBEKeySpec(password, salt, ITERATIONSCOUNT,
+		final KeySpec keySpec = new PBEKeySpec(password, salt, ITERATIONS_COUNT,
 				128);
 
 		final SecretKey secretKey = factoryKeyEncrypt.generateSecret(keySpec);
@@ -134,8 +134,7 @@ public class AESCofferKey extends CofferKey {
 	public byte[] lockCoffer(final byte[] treasureBytes) {
 		try {
 			final Cipher cipher = initCipher(Cipher.ENCRYPT_MODE);
-			final byte[] encrypted = cipher.doFinal(treasureBytes);
-			return encrypted;
+			return cipher.doFinal(treasureBytes);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			// TODO : handle exceptions
@@ -150,8 +149,7 @@ public class AESCofferKey extends CofferKey {
 	public byte[] openCoffer(final byte[] encryptedBytes) {
 		try {
 			final Cipher cipher = initCipher(Cipher.DECRYPT_MODE);
-			final byte[] decrypted_bytes = cipher.doFinal(encryptedBytes);
-			return decrypted_bytes;
+			return cipher.doFinal(encryptedBytes);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			// TODO : handle exceptions

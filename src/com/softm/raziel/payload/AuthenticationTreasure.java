@@ -66,11 +66,11 @@ public class AuthenticationTreasure implements Serializable {
 	/**
 	 * Sets the authentication token.
 	 *
-	 * @param autenticationToken
+	 * @param authenticationToken
 	 *            the new authentication token
 	 */
-	public void setAuthenticationToken(final String autenticationToken) {
-		authenticationToken = autenticationToken;
+	public void setAuthenticationToken(final String authenticationToken) {
+		this.authenticationToken = authenticationToken;
 	}
 
 }

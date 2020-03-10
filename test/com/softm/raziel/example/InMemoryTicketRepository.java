@@ -6,7 +6,7 @@ import com.softm.raziel.payload.ContentTicket;
 import com.softm.raziel.repo.TicketRepository;
 
 public class InMemoryTicketRepository implements TicketRepository {
-	Long ticketSequence = new Long(1);
+	Long ticketSequence = Long.valueOf(1);
 	HashMap<Long, ContentTicket> tickets = new HashMap<Long, ContentTicket>();
 
 	@Override

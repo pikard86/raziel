@@ -24,16 +24,16 @@ import java.util.UUID;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.crypt.AESCofferKey;
-import com.softm.raziel.crypt.RSACyperUtil;
+import com.softm.raziel.crypt.RSACypherUtil;
 import com.softm.raziel.exceptions.ContentException;
 import com.softm.raziel.payload.Coffer;
 import com.softm.raziel.payload.ContentTicket;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ContentCilent.
+ * The Class ContentClient.
  */
-public class ContentCilent {
+public class ContentClient {
 
 	/** The content channel. */
 	private final ContentChannel contentChannel;
@@ -44,7 +44,7 @@ public class ContentCilent {
 	 * @param contentChannel
 	 *            the content channel
 	 */
-	public ContentCilent(final ContentChannel contentChannel) {
+	public ContentClient(final ContentChannel contentChannel) {
 		this.contentChannel = contentChannel;
 	}
 
@@ -64,7 +64,7 @@ public class ContentCilent {
 	public <T extends Serializable> T getContent(final long contentId,
 			final AuthenticatedSession session) throws ContentException {
 		final Owner owner = session.getOwner();
-		final byte[] privateKey = session.getOwnerPriveteKey();
+		final byte[] privateKey = session.getOwnerPrivateKey();
 		final ContentTicket ticket = contentChannel.getTicket(contentId,
 				owner.getId());
 		if (ticket == null) {
@@ -77,7 +77,7 @@ public class ContentCilent {
 					+ contentId);
 		}
 
-		final AESCofferKey key = RSACyperUtil.getKeyFromTicket(ticket,
+		final AESCofferKey key = RSACypherUtil.getKeyFromTicket(ticket,
 				privateKey);
 		contentCoffer.open(key);
 
@@ -102,7 +102,7 @@ public class ContentCilent {
 			final AESCofferKey contentKey) {
 		final ContentTicket tiket = new ContentTicket();
 		tiket.setSharedCofferId(sharedCofferId);
-		tiket.setTicket(RSACyperUtil.generateTicket(contentKey,
+		tiket.setTicket(RSACypherUtil.generateTicket(contentKey,
 				recipientPublicKey));
 		return contentChannel.issueContentTicket(recypientId, tiket);
 	}
@@ -116,8 +116,6 @@ public class ContentCilent {
 	 *            the content id
 	 * @param session
 	 *            the session
-	 * @param recipientsIds
-	 *            the recipients ids
 	 * @return
 	 * @throws ContentException
 	 *             the content exception

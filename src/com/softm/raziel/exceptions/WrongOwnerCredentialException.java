@@ -22,8 +22,8 @@ package com.softm.raziel.exceptions;
  */
 public class WrongOwnerCredentialException extends Exception {
 
-	/** The Constant WRONG_AUTHENTICATION_TOKEN_FOR_OWNRE_ID. */
-	private static final String WRONG_AUTHENTICATION_TOKEN_FOR_OWNRE_ID = "Wrong authentication token for ownre id : ";
+	/** The Constant WRONG_AUTHENTICATION_TOKEN_FOR_OWNER_ID. */
+	private static final String WRONG_AUTHENTICATION_TOKEN_FOR_OWNER_ID = "Wrong authentication token for ownre id : ";
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8361751331403510256L;
 
@@ -34,7 +34,7 @@ public class WrongOwnerCredentialException extends Exception {
 	 *            the owner id
 	 */
 	public WrongOwnerCredentialException(final String ownerId) {
-		super(WRONG_AUTHENTICATION_TOKEN_FOR_OWNRE_ID + ownerId);
+		super(WRONG_AUTHENTICATION_TOKEN_FOR_OWNER_ID + ownerId);
 	}
 
 }

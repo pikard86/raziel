@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import com.softm.raziel.crypt.AsymmetricKey;
 import com.softm.raziel.crypt.CofferKey;
-import com.softm.raziel.crypt.RSACyperUtil;
+import com.softm.raziel.crypt.RSACypherUtil;
 import com.softm.raziel.payload.AuthenticationTreasure;
 import com.softm.raziel.payload.Coffer;
 
@@ -32,7 +32,7 @@ import com.softm.raziel.payload.Coffer;
 public class OwnerFactory {
 
 	/**
-	 * Creates the owner. with encripted authentication treasures
+	 * Creates the owner. with encrypted authentication treasures
 	 *
 	 * @param ownerId
 	 *            the owner id
@@ -59,7 +59,7 @@ public class OwnerFactory {
 		/*
 		 * Obtains the asymmetric key
 		 */
-		final AsymmetricKey asymmetricKey = RSACyperUtil.getCofferKey();
+		final AsymmetricKey asymmetricKey = RSACypherUtil.getCofferKey();
 		/*
 		 * Put the key into the treasure
 		 */

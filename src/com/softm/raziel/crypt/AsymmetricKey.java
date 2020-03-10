@@ -21,7 +21,7 @@ import java.io.Serializable;
 // TODO: Auto-generated Javadoc
 
 /**
- * The Class AsimmetricKey.
+ * The Class AsymmetricKey.
  */
 public class AsymmetricKey implements Serializable {
 	

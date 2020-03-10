@@ -36,9 +36,9 @@ import com.softm.raziel.payload.ContentTicket;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RSACyperUtil.
+ * The Class RSACypherUtil.
  */
-public class RSACyperUtil {
+public class RSACypherUtil {
 
 	/**
 	 * Decript rsa.

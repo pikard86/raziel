@@ -51,7 +51,7 @@ public class ClientFactory {
 		final RazielClient razielClient = new RazielClient();
 		razielClient.setAuthenticationClient(new AuthenticationClient(
 				authenticationChannel));
-		razielClient.setContentCilent(new ContentCilent(contentChannel));
+		razielClient.setContentClient(new ContentClient(contentChannel));
 		return razielClient;
 	}
 }

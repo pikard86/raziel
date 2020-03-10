@@ -79,9 +79,9 @@ public class AppExampleTest {
 
 		final Map<String, Long> contentSharedWithTrudy = alice
 				.shareExistingContent(sharedContents.get(ALICE_ID), TRUDY_ID);
-		final Message fromAliceToTruy = trudy.getContent(contentSharedWithTrudy
+		final Message fromAliceToTrudy = trudy.getContent(contentSharedWithTrudy
 				.get(TRUDY_ID));
-		assertEquals(messageToAlice, fromAliceToTruy);
+		assertEquals(messageToAlice, fromAliceToTrudy);
 
 	}
 

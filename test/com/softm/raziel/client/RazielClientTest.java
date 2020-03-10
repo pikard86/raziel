@@ -129,7 +129,7 @@ public class RazielClientTest {
 
 		final Message msg = new Message("Hello Bob", new Date());
 
-		final Long mockContentID = new Long(112);
+		final Long mockContentID = Long.valueOf(112);
 		Mockito.when(contentChannel.storeCoffer(Mockito.any(Coffer.class)))
 				.thenReturn(mockContentID);
 
@@ -144,8 +144,8 @@ public class RazielClientTest {
 		verify(contentChannel).storeCoffer(cofferCaptor.capture());
 		when(contentChannel.getCoffer(mockContentID)).thenReturn(
 				cofferCaptor.getValue());
-		final Message retreivaedMsg = razielClient
+		final Message retrievedMsg = razielClient
 				.getContent(contentId);
-		org.junit.Assert.assertEquals(msg, retreivaedMsg);
+		org.junit.Assert.assertEquals(msg, retrievedMsg);
 	}
 }

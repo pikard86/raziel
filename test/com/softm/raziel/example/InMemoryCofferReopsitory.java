@@ -7,7 +7,7 @@ import com.softm.raziel.repo.CofferRepository;
 
 public class InMemoryCofferReopsitory implements CofferRepository {
 	private final HashMap<Long, Coffer> coffers = new HashMap<Long, Coffer>();
-	private Long cofferSequence = new Long(1);
+	private Long cofferSequence = Long.valueOf(1);
 
 	@Override
 	public Coffer findById(final long id) {

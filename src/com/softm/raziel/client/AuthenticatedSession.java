@@ -74,11 +74,11 @@ public class AuthenticatedSession {
 	}
 
 	/**
-	 * Gets the owner privete key.
+	 * Gets the owner private key.
 	 *
-	 * @return the owner privete key
+	 * @return the owner private key
 	 */
-	public byte[] getOwnerPriveteKey() {
+	public byte[] getOwnerPrivateKey() {
 		return asymmetricKey.getPrivateKey();
 	}
 

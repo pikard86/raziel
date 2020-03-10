@@ -26,9 +26,9 @@ import com.softm.raziel.payload.Coffer;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AuthCannelMock.
+ * The Class AuthChannelMock.
  */
-public class AuthCannelMock implements AuthenticationChannel {
+public class AuthChannelMock implements AuthenticationChannel {
 
 	/** The owners. */
 	public HashMap<String, Owner> owners = new HashMap<String, Owner>();

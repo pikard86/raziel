@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import com.softm.raziel.Owner;
 import com.softm.raziel.OwnerFactory;
-import com.softm.raziel.client.AuthCannelMock;
+import com.softm.raziel.client.AuthChannelMock;
 import com.softm.raziel.client.AuthenticationClient;
 import com.softm.raziel.crypt.AESCofferKey;
 import com.softm.raziel.crypt.CofferKey;
@@ -49,7 +49,7 @@ public class AuthenticationProviderTest {
 	 */
 	@Before
 	public void setupTest() {
-		final AuthCannelMock channelMock = new AuthCannelMock();
+		final AuthChannelMock channelMock = new AuthChannelMock();
 
 		final CofferKey ownerKey = new AESCofferKey(PASSWORD.getBytes());
 		final Owner owner = OwnerFactory.createOwner(OWNER_ID, ownerKey);

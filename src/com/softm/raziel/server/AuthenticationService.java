@@ -35,7 +35,7 @@ public class AuthenticationService {
 	private final OwnerRepository ownerRepository;
 
 	/**
-	 * Instantiates a new autentication server.
+	 * Instantiates a new authentication server.
 	 *
 	 * @param ownerRepository
 	 *            the owner repository
