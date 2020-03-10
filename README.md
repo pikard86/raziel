@@ -1,5 +1,5 @@
 # Welcome to Raziel Project 
-
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![master](https://github.com/pikard86/raziel/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 
 A library for private content sharing.
