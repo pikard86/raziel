@@ -115,7 +115,7 @@ public class RSACypherUtil {
     public static AsymmetricKey getCofferKey() {
         try {
             final KeyPairGenerator kpg = KeyPairGenerator.getInstance(RSA);
-            kpg.initialize(1024);
+            kpg.initialize(2048);
             final KeyPair kp = kpg.generateKeyPair();
             // X.509
             final byte[] publicKey = kp.getPublic().getEncoded();
