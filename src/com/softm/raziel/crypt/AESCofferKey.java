@@ -17,6 +17,8 @@
  */
 package com.softm.raziel.crypt;
 
+import com.softm.raziel.exceptions.CipherInitializationException;
+
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -53,6 +55,7 @@ public class AESCofferKey extends CofferKey {
      * The Constant serialVersionUID.
      */
     private static final long serialVersionUID = -3663336776189514516L;
+    public static final int KEY_LENGTH = 256;
 
     /**
      * The iterations count.
@@ -118,30 +121,30 @@ public class AESCofferKey extends CofferKey {
      *
      * @param encryptMode the encrypt mode
      * @return the cipher
-     * @throws NoSuchAlgorithmException the no such algorithm exception
-     * @throws InvalidKeySpecException  the invalid key spec exception
-     * @throws NoSuchPaddingException   the no such padding exception
-     * @throws InvalidKeyException      the invalid key exception
+     * @throws CipherInitializationException thrown in case of cipher suite misconfiguration
      */
     private Cipher initCipher(final int encryptMode)
-            throws NoSuchAlgorithmException, InvalidKeySpecException,
-            NoSuchPaddingException, InvalidKeyException {
-        // TODO: extract secret key generation
-        final char[] password = new String(secretKey).toCharArray();
-        salt = "salt".getBytes();
+            throws CipherInitializationException {
+        try {
+            final char[] password = new String(secretKey).toCharArray();
+            salt = "salt".getBytes();
 
-        final SecretKeyFactory factoryKeyEncrypt = SecretKeyFactory
-                .getInstance(PBKDF2_WITH_HMAC_SHA1);
-        final KeySpec keySpec = new PBEKeySpec(password, salt, ITERATIONS_COUNT,
-                128);
+            final KeySpec keySpec = new PBEKeySpec(password, salt,
+                    ITERATIONS_COUNT,
+                    KEY_LENGTH);
 
-        final SecretKey secretKey = factoryKeyEncrypt.generateSecret(keySpec);
-        final SecretKeySpec encryptKey = new SecretKeySpec(
-                secretKey.getEncoded(), AES);
+            final SecretKeyFactory factoryKeyEncrypt = SecretKeyFactory
+                    .getInstance(PBKDF2_WITH_HMAC_SHA1);
+            final SecretKey secretKey = factoryKeyEncrypt.generateSecret(keySpec);
+            final SecretKeySpec encryptKey = new SecretKeySpec(
+                    secretKey.getEncoded(), AES);
 
-        final Cipher cipher = Cipher.getInstance(AES_ECB_PKCS5_PADDING);
-        cipher.init(encryptMode, encryptKey);
-        return cipher;
+            final Cipher cipher = Cipher.getInstance(AES_ECB_PKCS5_PADDING);
+            cipher.init(encryptMode, encryptKey);
+            return cipher;
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
+            throw new CipherInitializationException("Unable to initialize cipher", e);
+        }
     }
 
     /* (non-Javadoc)
@@ -153,10 +156,8 @@ public class AESCofferKey extends CofferKey {
             final Cipher cipher = initCipher(Cipher.ENCRYPT_MODE);
             return cipher.doFinal(treasureBytes);
         } catch (final Exception e) {
-            e.printStackTrace();
-            // TODO : handle exceptions
+            throw new RuntimeException("Unable to lock the coffer", e);
         }
-        return null;
     }
 
     /* (non-Javadoc)
@@ -168,9 +169,7 @@ public class AESCofferKey extends CofferKey {
             final Cipher cipher = initCipher(Cipher.DECRYPT_MODE);
             return cipher.doFinal(encryptedBytes);
         } catch (final Exception e) {
-            e.printStackTrace();
-            // TODO : handle exceptions
+            throw new RuntimeException("Unable to open the coffer", e);
         }
-        return null;
     }
 }

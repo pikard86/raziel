@@ -17,6 +17,7 @@
  */
 package com.softm.raziel.crypt;
 
+import com.softm.raziel.exceptions.CipherInitializationException;
 import com.softm.raziel.payload.ContentTicket;
 
 import javax.crypto.BadPaddingException;
@@ -49,25 +50,21 @@ public class RSACypherUtil {
      * @param encryptedData   the encrypted data
      * @param privateKeyBytes the private key bytes
      * @return the byte[]
-     * @throws NoSuchAlgorithmException  the no such algorithm exception
-     * @throws InvalidKeySpecException   the invalid key spec exception
-     * @throws NoSuchPaddingException    the no such padding exception
-     * @throws IllegalBlockSizeException the illegal block size exception
-     * @throws BadPaddingException       the bad padding exception
-     * @throws InvalidKeyException       the invalid key exception
+     * @throws CipherInitializationException thrown in case of wrong cipher initialization
      */
     public static byte[] decryptRSA(final byte[] encryptedData,
-                                    final byte[] privateKeyBytes) throws NoSuchAlgorithmException,
-            InvalidKeySpecException, NoSuchPaddingException,
-            IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-
-        final PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(privateKeyBytes);
-        final KeyFactory kf = KeyFactory.getInstance(RSA);
-        final PrivateKey privateKey = kf.generatePrivate(ks);
-        final Cipher c = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
-        c.init(Cipher.DECRYPT_MODE, privateKey);
-        return c.doFinal(encryptedData);
-
+                                    final byte[] privateKeyBytes) throws CipherInitializationException {
+        try {
+            final PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(privateKeyBytes);
+            final KeyFactory kf = KeyFactory.getInstance(RSA);
+            final PrivateKey privateKey = kf.generatePrivate(ks);
+            final Cipher c = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
+            c.init(Cipher.DECRYPT_MODE, privateKey);
+            return c.doFinal(encryptedData);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException |
+                NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+            throw new CipherInitializationException("Unable to decrypt data using RSA", e);
+        }
     }
 
     /**
@@ -76,23 +73,21 @@ public class RSACypherUtil {
      * @param data           the data
      * @param publicKeyBytes the public key bytes
      * @return the byte[]
-     * @throws NoSuchAlgorithmException  the no such algorithm exception
-     * @throws InvalidKeySpecException   the invalid key spec exception
-     * @throws NoSuchPaddingException    the no such padding exception
-     * @throws InvalidKeyException       the invalid key exception
-     * @throws IllegalBlockSizeException the illegal block size exception
-     * @throws BadPaddingException       the bad padding exception
+     * @throws CipherInitializationException thrown in case of error during the cipher initialization
      */
     public static byte[] encryptRSA(final byte[] data,
-                                    final byte[] publicKeyBytes) throws NoSuchAlgorithmException,
-            InvalidKeySpecException, NoSuchPaddingException,
-            InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        final X509EncodedKeySpec ks = new X509EncodedKeySpec(publicKeyBytes);
-        final KeyFactory kf = KeyFactory.getInstance(RSA);
-        final PublicKey publicKey = kf.generatePublic(ks);
-        final Cipher cipher = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
-        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-        return cipher.doFinal(data);
+                                    final byte[] publicKeyBytes) throws CipherInitializationException {
+        try {
+            final X509EncodedKeySpec ks = new X509EncodedKeySpec(publicKeyBytes);
+            final KeyFactory kf = KeyFactory.getInstance(RSA);
+            final PublicKey publicKey = kf.generatePublic(ks);
+            final Cipher cipher = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            return cipher.doFinal(data);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException |
+                InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+            throw new CipherInitializationException("Unable to encrypt data with RSA", e);
+        }
     }
 
     /**
@@ -119,7 +114,6 @@ public class RSACypherUtil {
      */
     public static AsymmetricKey getCofferKey() {
         try {
-
             final KeyPairGenerator kpg = KeyPairGenerator.getInstance(RSA);
             kpg.initialize(1024);
             final KeyPair kp = kpg.generateKeyPair();
@@ -130,12 +124,9 @@ public class RSACypherUtil {
 
             return new AsymmetricKey(publicKey,
                     privateKey);
-
         } catch (final NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /**
