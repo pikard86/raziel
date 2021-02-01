@@ -5,7 +5,7 @@
     <artifactId>softm-raziel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito-all.version>1.8.4</mockito-all.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 
