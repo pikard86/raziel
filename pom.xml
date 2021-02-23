@@ -6,6 +6,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <java-version.release>11</java-version.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <junit.version>4.13.1</junit.version>
         <mockito-all.version>1.8.4</mockito-all.version>
